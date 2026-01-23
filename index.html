@@ -5,39 +5,39 @@
 <!-- Title Tag  -->
 <title>E-SHOP || HOME PAGE</title>
 <!-- Favicon -->
-<link rel="icon" type="image/png" href="./public/images/favicon.png">
+<link rel="icon" type="image/png" href="public/images/favicon.png">
 <!-- Web Font -->
 <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
 
 <!-- StyleSheet -->
-<link rel="manifest" href="./public/manifest.json">
+<link rel="manifest" href="public/manifest.json">
 <!-- Bootstrap -->
-<link rel="stylesheet" href="./public/bootstrap.css">
+<link rel="stylesheet" href="public/bootstrap.css">
 <!-- Magnific Popup -->
-<link rel="stylesheet" href="./public/magnific-popup.min.css">
+<link rel="stylesheet" href="public/magnific-popup.min.css">
 <!-- Font Awesome -->
-<link rel="stylesheet" href="./public/font-awesome.css">
+<link rel="stylesheet" href="public/font-awesome.css">
 <!-- Fancybox -->
-<link rel="stylesheet" href="./public/fe/jquery.fancybox.min.css">
+<link rel="stylesheet" href="public/fe/jquery.fancybox.min.css">
 <!-- Themify Icons -->
-<link rel="stylesheet" href="./public/fe/themify-icons.css">
+<link rel="stylesheet" href="public/fe/themify-icons.css">
 <!-- Nice Select CSS -->
-<link rel="stylesheet" href="./public/fe/niceselect.css">
+<link rel="stylesheet" href="public/fe/niceselect.css">
 <!-- Animate CSS -->
-<link rel="stylesheet" href="./public/fe/animate.css">
+<link rel="stylesheet" href="public/fe/animate.css">
 <!-- Flex Slider CSS -->
-<link rel="stylesheet" href="./public/fe/flex-slider.min.css">
+<link rel="stylesheet" href="public/fe/flex-slider.min.css">
 <!-- Owl Carousel -->
-<link rel="stylesheet" href="./public/fe/owl-carousel.css">
+<link rel="stylesheet" href="public/fe/owl-carousel.css">
 <!-- Slicknav -->
-<link rel="stylesheet" href="./public/fe/slicknav.min.css">
+<link rel="stylesheet" href="public/fe/slicknav.min.css">
 <!-- Jquery Ui -->
-<link rel="stylesheet" href="./public/fe/jquery-ui.css">
+<link rel="stylesheet" href="public/fe/jquery-ui.css">
 
 <!-- Eshop StyleSheet -->
-<link rel="stylesheet" href="./public/fe/reset.css">
-<link rel="stylesheet" href="./public/fe/style.css">
-<link rel="stylesheet" href="./public/fe/responsive.css">
+<link rel="stylesheet" href="public/fe/reset.css">
+<link rel="stylesheet" href="public/fe/style.css">
+<link rel="stylesheet" href="public/fe/responsive.css">
 <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5f2e5abf393162001291e431&product=inline-share-buttons' async='async'></script>
 <style>
     /* Multilevel dropdown */
@@ -58,50 +58,70 @@
     margin-top: 0px;
     margin-left: 0px;
     }
-
-    /*
 </style>
-    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5f2e5abf393162001291e431&product=inline-share-buttons' async='async'></script>
-    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5f2e5abf393162001291e431&product=inline-share-buttons' async='async'></script>
-    <style>
-        /* Banner Sliding */
-        #Gslider .carousel-inner {
-        background: #000000;
-        color:black;
-        }
+<style>
+    /* Banner Sliding */
+    #Gslider .carousel-inner {
+    background: #000000;
+    color:black;
+    }
 
-        #Gslider .carousel-inner{
-        height: 550px;
-        }
-        #Gslider .carousel-inner img{
-            width: 100% !important;
-            opacity: .8;
-        }
+    #Gslider .carousel-inner{
+    height: 550px;
+    }
+    #Gslider .carousel-inner img{
+        width: 100% !important;
+        opacity: .8;
+    }
 
-        #Gslider .carousel-inner .carousel-caption {
-        bottom: 60%;
-        }
+    #Gslider .carousel-inner .carousel-caption {
+    bottom: 60%;
+    }
 
-        #Gslider .carousel-inner .carousel-caption h1 {
-        font-size: 50px;
-        font-weight: bold;
-        line-height: 100%;
-        color: #F7941D;
-        }
+    #Gslider .carousel-inner .carousel-caption h1 {
+    font-size: 50px;
+    font-weight: bold;
+    line-height: 100%;
+    color: #F7941D;
+    }
 
-        #Gslider .carousel-inner .carousel-caption p {
-        font-size: 18px;
-        color: black;
-        margin: 28px 0 28px 0;
-        }
+    #Gslider .carousel-inner .carousel-caption p {
+    font-size: 18px;
+    color: black;
+    margin: 28px 0 28px 0;
+    }
 
-        #Gslider .carousel-indicators {
-        bottom: 70px;
-        }
-    </style>
+    #Gslider .carousel-indicators {
+    bottom: 70px;
+    }
+    
+    /* Hide preloader on load */
+    body.loaded .preloader {
+        display: none !important;
+    }
+</style>
 	
 </head>
 <body class="js">
+<script>
+    // Hide preloader after 1.5 seconds
+    setTimeout(function() {
+        document.body.classList.add('loaded');
+        var preloader = document.querySelector('.preloader');
+        if (preloader) {
+            preloader.style.display = 'none';
+        }
+    }, 1500);
+    
+    // Hide preloader when window loads
+    window.addEventListener('load', function() {
+        document.body.classList.add('loaded');
+        var preloader = document.querySelector('.preloader');
+        if (preloader) {
+            preloader.style.display = 'none';
+        }
+    });
+</script>
 	
 	<!-- Preloader -->
 	<div class="preloader">
@@ -120,15 +140,7 @@
     <div class="topbar">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-12 col-12">
-                    <!-- Top Left -->
-                    <div class="top-left">
-                        <ul class="list-main">
-                                                        <li><i class="ti-headphone-alt"></i> +060 (800) 801-582 </li>
-                            <li><i class="ti-email"></i>  eshop@gmail.com </li>
-                        </ul>
-                    </div>
-                    <!--/ End Top Left -->
+
                 </div>
                 <div class="col-lg-6 col-md-12 col-12">
                     <!-- Top Right -->
@@ -152,7 +164,7 @@
                     <!-- Logo -->
                     <div class="logo">
                                             
-                        <a href="index.html"><img src="./public/images/logo.jpg" alt="logo"></a>
+                        <a href="index.html"><img src="public/images/logo.jpg" alt="logo"></a>
                     </div>
                     <!--/ End Logo -->
                     <!-- Search Form -->
@@ -255,7 +267,7 @@
                                                                                     <!-- Single Banner  -->
                         <div class="col-lg-4 col-md-6 col-12">
                             <div class="single-banner">
-                                                                    <img src="./public/banner.png" alt="Footwear">
+                                                                    <img src="public/banner.png" alt="Footwear">
                                                                 <div class="content">
                                     <h3>Footwear</h3>
                                         <a href="index.html">Discover Now</a>
@@ -266,7 +278,7 @@
                                                             <!-- Single Banner  -->
                         <div class="col-lg-4 col-md-6 col-12">
                             <div class="single-banner">
-                                                                    <img src="./public/background.jpg" alt="Garments">
+                                                                    <img src="public/background.jpg" alt="Garments">
                                                                 <div class="content">
                                     <h3>Garments</h3>
                                         <a href="index.html">Discover Now</a>
@@ -471,7 +483,7 @@
 						<!-- Single Widget -->
 						<div class="single-footer about">
 							<div class="logo">
-								<a href="index.html"><img src="./public/images/logo2.png" alt="#"></a>
+							<a href="index.html"><img src="public/images/logo2.png" alt="#"></a>
 							</div>
 														<p class="text"> Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. </p>
 							<p class="call">Got Question? Call us 24/7<span><a href="tel:123456789"> +060 (800) 801-582 </a></span></p>
@@ -538,7 +550,7 @@
 						</div>
 						<div class="col-lg-6 col-12">
 							<div class="right">
-								<img src="./public/images/payments.png" alt="#">
+							<img src="public/images/payments.png" alt="#">
 							</div>
 						</div>
 					</div>
