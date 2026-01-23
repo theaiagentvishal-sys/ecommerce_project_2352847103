@@ -170,8 +170,9 @@
                             <span>Total:</span>
                             <span id="total">$0.00</span>
                         </div>
-                        <button class="btn-checkout" onclick="proceedToCheckout()">Proceed to Checkout</button>
-                        <a href="products.html" style="display: block; text-align: center; margin-top: 15px; color: #F7941D; text-decoration: none;">Continue Shopping</a>
+                        <button class="btn-checkout" onclick="proceedToCheckout()" style="background: #F7941D;">🛒 Proceed to Checkout</button>
+                        <button class="btn-checkout" onclick="expressCheckout()" style="background: #27ae60; margin-top: 10px;">⚡ Express Checkout</button>
+                        <a href="products.html" style="display: block; text-align: center; margin-top: 15px; color: #F7941D; text-decoration: none; font-weight: 600;">← Continue Shopping</a>
                     </div>
                 </div>
             </div>
@@ -371,13 +372,20 @@
             alert('Added ' + name + ' to cart! 🎉');
         }
 
-        // Simple cart management with localStorage
+        // Optimized cart management
         function loadCart() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cart = CartManager.getCart();
             const cartItems = document.getElementById('cartItems');
             
             if (cart.length === 0) {
-                cartItems.innerHTML = '<div class="empty-cart"><i class="ti-bag"></i><h3>Your cart is empty</h3><p>Add items to get started</p></div>';
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="ti-bag"></i>
+                        <h3>Your cart is empty</h3>
+                        <p>Add items to get started</p>
+                        <button onclick="window.location.href = 'products.html'" style="margin-top: 15px; padding: 12px 25px; background: #F7941D; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">🛒 Continue Shopping</button>
+                    </div>
+                `;
                 displayRecommendations();
                 return;
             }
@@ -385,25 +393,25 @@
             let html = '';
             let subtotal = 0;
             
-            cart.forEach((item, index) => {
+            cart.forEach((item) => {
                 const itemTotal = item.price * item.quantity;
                 subtotal += itemTotal;
                 html += `
                     <div class="cart-item">
                         <div class="item-image">
-                            <img src="https://via.placeholder.com/100/F7941D/FFFFFF?text=${item.name}" alt="${item.name}" style="width:100%;height:100%;border-radius:4px;">
+                            <i class="fa fa-shopping-bag" style="font-size: 40px; color: #F7941D;"></i>
                         </div>
                         <div class="item-details">
                             <div class="item-name">${item.name}</div>
                             <div class="item-price">$${item.price.toFixed(2)}</div>
                             <div class="item-quantity">
-                                <button class="qty-btn" onclick="updateQuantity(${index}, -1)">-</button>
-                                <input type="number" value="${item.quantity}" min="1" style="width:50px;text-align:center;border:1px solid #ddd;">
-                                <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                                <button class="qty-btn" onclick="updateQuantity('${item.name}', -1)">−</button>
+                                <span style="margin: 0 10px; font-weight: 600;">${item.quantity}</span>
+                                <button class="qty-btn" onclick="updateQuantity('${item.name}', 1)">+</button>
                             </div>
-                            <div>Subtotal: $${itemTotal.toFixed(2)}</div>
+                            <div>Subtotal: <strong>$${itemTotal.toFixed(2)}</strong></div>
                         </div>
-                        <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+                        <button class="remove-btn" onclick="removeFromCart('${item.name}')">Remove</button>
                     </div>
                 `;
             });
@@ -425,34 +433,36 @@
             document.getElementById('total').textContent = '$' + total.toFixed(2);
         }
         
-        function removeFromCart(index) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            cart.splice(index, 1);
-            localStorage.setItem('cart', JSON.stringify(cart));
-            loadCart();
+        function removeFromCart(productName) {
+            if (confirm('Remove this item from cart?')) {
+                CartManager.removeFromCart(productName);
+                CartManager.updateCartDisplay();
+                loadCart();
+            }
         }
         
-        function updateQuantity(index, change) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            cart[index].quantity += change;
-            if (cart[index].quantity < 1) cart[index].quantity = 1;
-            localStorage.setItem('cart', JSON.stringify(cart));
-            loadCart();
+        function updateQuantity(productName, change) {
+            let cart = CartManager.getCart();
+            const item = cart.find(i => i.name === productName);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity < 1) item.quantity = 1;
+                CartManager.updateQuantity(productName, item.quantity);
+                CartManager.updateCartDisplay();
+                loadCart();
+            }
         }
         
         function updateCartCount() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-            document.getElementById('cartCount').textContent = count;
+            CartManager.updateCartDisplay();
         }
         
         function proceedToCheckout() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            if (cart.length === 0) {
-                alert('Your cart is empty!');
-                return;
-            }
-            window.location.href = 'checkout.html';
+            ShoppingFlow.oneClickCheckout();
+        }
+        
+        function expressCheckout() {
+            ShoppingFlow.expressCheckout();
         }
         
         // Initialize
