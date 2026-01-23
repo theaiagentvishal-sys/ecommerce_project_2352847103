@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - E-SHOP</title>
+    <link rel="icon" type="image/png" href="public/images/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="public/bootstrap.css">
+    <link rel="stylesheet" href="public/font-awesome.css">
+    <link rel="stylesheet" href="public/fe/themify-icons.css">
+    <link rel="stylesheet" href="public/fe/style.css">
+    <style>
+        .blog-container { padding: 50px 0; min-height: 600px; }
+        .blog-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
+        .blog-post { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        .blog-post-image { width: 100%; height: 300px; object-fit: cover; }
+        .blog-post-content { padding: 20px; }
+        .blog-post-title { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+        .blog-meta { display: flex; gap: 20px; color: #999; font-size: 14px; margin-bottom: 15px; }
+        .blog-meta a { color: #999; text-decoration: none; }
+        .blog-excerpt { color: #666; line-height: 1.6; margin-bottom: 15px; }
+        .read-more { color: #F7941D; text-decoration: none; font-weight: 600; }
+        .blog-sidebar { position: sticky; top: 20px; }
+        .sidebar-widget { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .sidebar-widget h4 { margin: 0 0 15px 0; color: #333; border-bottom: 2px solid #F7941D; padding-bottom: 10px; }
+        .category-list, .recent-posts { list-style: none; padding: 0; margin: 0; }
+        .category-list li, .recent-posts li { padding: 8px 0; border-bottom: 1px solid #eee; }
+        .category-list a, .recent-posts a { color: #666; text-decoration: none; transition: 0.3s; }
+        .category-list a:hover, .recent-posts a:hover { color: #F7941D; }
+        .search-box { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 15px; }
+        .comment-section { background: #f9f9f9; padding: 20px; border-radius: 8px; margin-top: 30px; }
+        .comment { background: #fff; padding: 15px; border-radius: 4px; margin-bottom: 15px; border-left: 4px solid #F7941D; }
+        .comment-author { font-weight: 600; margin-bottom: 5px; }
+        .comment-date { color: #999; font-size: 12px; margin-bottom: 10px; }
+        .comment-replies { margin-left: 30px; margin-top: 15px; }
+        .reply-form { background: #fff; padding: 15px; border-radius: 4px; margin-top: 15px; }
+        @media (max-width: 768px) {
+            .blog-grid { grid-template-columns: 1fr; }
+            .blog-sidebar { position: static; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header shop">
+        <div class="topbar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6"><div class="left-content"><ul class="list-main"><li><i class="ti-location-pin"></i> <span>London Oxford Street, UK</span></li></ul></div></div>
+                    <div class="col-lg-6"><div class="right-content"><ul class="list-main"><li><a href="track-order.html">Track Order</a></li><li><a href="login.html">Login</a> / <a href="register.html">Register</a></li></ul></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="middle-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2"><div class="logo"><a href="index.html"><img src="public/images/logo.jpg" alt="logo"></a></div></div>
+                    <div class="col-lg-8"><div class="search-bar-top"><div class="search-bar"><form><input placeholder="Search..." type="search"><button class="btnn"><i class="ti-search"></i></button></form></div></div></div>
+                    <div class="col-lg-2"><div class="right-bar"><div class="sinlge-bar shopping"><a href="wishlist.html"><i class="fa fa-heart-o"></i> <span class="total-count">0</span></a></div><div class="sinlge-bar shopping"><a href="cart.html"><i class="ti-bag"></i> <span class="total-count">0</span></a></div></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="header-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12"><div class="menu-area"><nav class="navbar navbar-expand-lg"><div class="navbar-collapse"><ul class="nav main-menu navbar-nav"><li><a href="index.html">Home</a></li><li><a href="products.html">Products</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li><li><a href="admin-dashboard.html">Admin</a></li></ul></div></nav></div></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="blog-container">
+        <div class="container">
+            <h2 style="margin-bottom: 30px;">Our Blog</h2>
+            
+            <div class="blog-grid">
+                <div>
+                    <!-- Blog Post 1 -->
+                    <div class="blog-post">
+                        <img src="https://via.placeholder.com/600x300?text=Running+Tips" alt="Blog" class="blog-post-image">
+                        <div class="blog-post-content">
+                            <h3 class="blog-post-title">Top 10 Running Tips for Beginners</h3>
+                            <div class="blog-meta">
+                                <span><i class="fa fa-calendar"></i> Jan 20, 2025</span>
+                                <span><i class="fa fa-user"></i> By Admin</span>
+                                <span><i class="fa fa-comments"></i> <a href="#comments">5 Comments</a></span>
+                            </div>
+                            <p class="blog-excerpt">Starting a running routine can be challenging. In this comprehensive guide, we share the top 10 tips to help beginners get started on the right track...</p>
+                            <a href="#" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+
+                    <!-- Blog Post 2 -->
+                    <div class="blog-post">
+                        <img src="https://via.placeholder.com/600x300?text=Winter+Fashion" alt="Blog" class="blog-post-image">
+                        <div class="blog-post-content">
+                            <h3 class="blog-post-title">Winter Fashion Guide 2025</h3>
+                            <div class="blog-meta">
+                                <span><i class="fa fa-calendar"></i> Jan 15, 2025</span>
+                                <span><i class="fa fa-user"></i> By Editor</span>
+                                <span><i class="fa fa-comments"></i> <a href="#comments">8 Comments</a></span>
+                            </div>
+                            <p class="blog-excerpt">Winter is here and it's time to update your wardrobe! Discover the latest fashion trends and style tips to stay warm and fashionable...</p>
+                            <a href="#" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+
+                    <!-- Blog Post 3 -->
+                    <div class="blog-post">
+                        <img src="https://via.placeholder.com/600x300?text=Product+Care" alt="Blog" class="blog-post-image">
+                        <div class="blog-post-content">
+                            <h3 class="blog-post-title">How to Care for Your Sports Equipment</h3>
+                            <div class="blog-meta">
+                                <span><i class="fa fa-calendar"></i> Jan 10, 2025</span>
+                                <span><i class="fa fa-user"></i> By Admin</span>
+                                <span><i class="fa fa-comments"></i> <a href="#comments">3 Comments</a></span>
+                            </div>
+                            <p class="blog-excerpt">Proper maintenance of your sports gear extends its lifespan and ensures optimal performance. Learn the best practices for cleaning and storing...</p>
+                            <a href="#" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+
+                    <!-- Blog Post 4 -->
+                    <div class="blog-post">
+                        <img src="https://via.placeholder.com/600x300?text=Healthy+Living" alt="Blog" class="blog-post-image">
+                        <div class="blog-post-content">
+                            <h3 class="blog-post-title">Healthy Living with Active Lifestyle</h3>
+                            <div class="blog-meta">
+                                <span><i class="fa fa-calendar"></i> Jan 5, 2025</span>
+                                <span><i class="fa fa-user"></i> By Health Expert</span>
+                                <span><i class="fa fa-comments"></i> <a href="#comments">12 Comments</a></span>
+                            </div>
+                            <p class="blog-excerpt">An active lifestyle is key to maintaining good health. Explore various exercises and wellness tips to improve your overall well-being...</p>
+                            <a href="#" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="blog-sidebar">
+                    <div class="sidebar-widget">
+                        <h4>Search</h4>
+                        <input type="text" class="search-box" placeholder="Search blog posts...">
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h4>Categories</h4>
+                        <ul class="category-list">
+                            <li><a href="#">Sports</a> <span style="color: #999;">(12)</span></li>
+                            <li><a href="#">Fashion</a> <span style="color: #999;">(8)</span></li>
+                            <li><a href="#">Health & Wellness</a> <span style="color: #999;">(6)</span></li>
+                            <li><a href="#">Product Reviews</a> <span style="color: #999;">(15)</span></li>
+                            <li><a href="#">Tips & Tricks</a> <span style="color: #999;">(10)</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h4>Recent Posts</h4>
+                        <ul class="recent-posts">
+                            <li><a href="#">Top 10 Running Tips for Beginners</a></li>
+                            <li><a href="#">Winter Fashion Guide 2025</a></li>
+                            <li><a href="#">How to Care for Your Sports Equipment</a></li>
+                            <li><a href="#">Healthy Living with Active Lifestyle</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h4>Newsletter</h4>
+                        <p style="color: #666; margin-bottom: 15px;">Subscribe to get the latest blog posts</p>
+                        <input type="email" placeholder="Your email" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px;">
+                        <button style="width: 100%; background: #F7941D; color: #fff; padding: 10px; border: none; border-radius: 4px; cursor: pointer;">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="comment-section" id="comments">
+                <h3>Comments & Discussion</h3>
+                
+                <div class="comment">
+                    <div class="comment-author">Sarah Johnson</div>
+                    <div class="comment-date">Jan 21, 2025</div>
+                    <p>Great tips! I especially liked the breathing techniques. Very helpful for beginners like me.</p>
+                    <a href="#" style="color: #F7941D; text-decoration: none;">Reply</a>
+                    
+                    <div class="comment-replies">
+                        <div class="comment">
+                            <div class="comment-author">Admin</div>
+                            <div class="comment-date">Jan 21, 2025</div>
+                            <p>Thank you for your kind words, Sarah! Happy to help on your running journey!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comment">
+                    <div class="comment-author">Michael Chen</div>
+                    <div class="comment-date">Jan 20, 2025</div>
+                    <p>Have you considered writing about trail running? Would love to hear your thoughts on outdoor running.</p>
+                    <a href="#" style="color: #F7941D; text-decoration: none;">Reply</a>
+                </div>
+
+                <div class="reply-form">
+                    <h4>Leave a Comment</h4>
+                    <textarea placeholder="Share your thoughts..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; min-height: 100px; margin-bottom: 10px;"></textarea>
+                    <input type="text" placeholder="Your Name" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px;">
+                    <input type="email" placeholder="Your Email" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px;">
+                    <button style="background: #F7941D; color: #fff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Post Comment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-area footer" style="margin-top: 50px;">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6"><div class="single-footer"><h4>About</h4><p>Premium online shopping experience</p></div></div>
+                    <div class="col-lg-3 col-md-6"><div class="single-footer links"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="products.html">Products</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div></div>
+                    <div class="col-lg-3 col-md-6"><div class="single-footer links"><h4>Support</h4><ul><li><a href="#">FAQ</a></li><li><a href="#">Returns</a></li><li><a href="#">Shipping</a></li></ul></div></div>
+                    <div class="col-lg-3 col-md-6"><div class="single-footer"><h4>Contact</h4><ul><li>Email: info@eshop.com</li><li>Phone: +1-800-ESHOP</li></ul></div></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

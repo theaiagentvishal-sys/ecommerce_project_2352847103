@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - E-SHOP</title>
+    <link rel="icon" type="image/png" href="public/images/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="public/bootstrap.css">
+    <link rel="stylesheet" href="public/font-awesome.css">
+    <link rel="stylesheet" href="public/fe/themify-icons.css">
+    <link rel="stylesheet" href="public/fe/style.css">
+    <style>
+        .profile-container { padding: 50px 0; min-height: 600px; }
+        .profile-tabs { display: flex; gap: 10px; margin-bottom: 30px; border-bottom: 2px solid #eee; }
+        .tab-btn { background: none; border: none; padding: 15px 20px; font-size: 16px; cursor: pointer; border-bottom: 3px solid transparent; font-weight: 600; }
+        .tab-btn.active { color: #F7941D; border-bottom-color: #F7941D; }
+        .tab-content { display: none; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .tab-content.active { display: block; }
+        .profile-section { background: #fff; padding: 30px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
+        .form-group input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        .btn-save { background: #F7941D; color: #fff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
+        .order-item { background: #f9f9f9; padding: 15px; border-radius: 4px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .order-status { font-weight: 600; color: #28a745; }
+        .review-item { background: #f9f9f9; padding: 15px; border-radius: 4px; margin-bottom: 15px; }
+        .review-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .review-rating { color: #FFC107; }
+    </style>
+</head>
+<body>
+    <header class="header shop">
+        <div class="topbar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6"><div class="left-content"><ul class="list-main"><li><i class="ti-location-pin"></i> <span>London Oxford Street, UK</span></li></ul></div></div>
+                    <div class="col-lg-6"><div class="right-content"><ul class="list-main"><li><a href="track-order.html">Track Order</a></li><li><a href="login.html">Login</a> / <a href="register.html">Register</a></li></ul></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="middle-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2"><div class="logo"><a href="index.html"><img src="public/images/logo.jpg" alt="logo"></a></div></div>
+                    <div class="col-lg-8"><div class="search-bar-top"><div class="search-bar"><form><input placeholder="Search..." type="search"><button class="btnn"><i class="ti-search"></i></button></form></div></div></div>
+                    <div class="col-lg-2"><div class="right-bar"><div class="sinlge-bar shopping"><a href="wishlist.html"><i class="fa fa-heart-o"></i> <span class="total-count">0</span></a></div><div class="sinlge-bar shopping"><a href="cart.html"><i class="ti-bag"></i> <span class="total-count">0</span></a></div></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="header-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12"><div class="menu-area"><nav class="navbar navbar-expand-lg"><div class="navbar-collapse"><ul class="nav main-menu navbar-nav"><li><a href="index.html">Home</a></li><li><a href="products.html">Products</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li><li><a href="admin-dashboard.html">Admin</a></li></ul></div></nav></div></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="profile-container">
+        <div class="container">
+            <h2 style="margin-bottom: 30px;">My Account</h2>
+            
+            <div class="profile-tabs">
+                <button class="tab-btn active" onclick="openTab(event, 'profile')">Profile</button>
+                <button class="tab-btn" onclick="openTab(event, 'orders')">Order History</button>
+                <button class="tab-btn" onclick="openTab(event, 'reviews')">My Reviews</button>
+                <button class="tab-btn" onclick="openTab(event, 'wishlist')">Wishlist</button>
+                <button class="tab-btn" onclick="openTab(event, 'notifications')">Notifications</button>
+            </div>
+
+            <div id="profile" class="tab-content active">
+                <div class="profile-section">
+                    <h3>Personal Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" value="John">
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" value="Doe">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" value="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" value="+1-800-ESHOP">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input type="text" value="123 Main Street">
+                        </div>
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" value="London">
+                        </div>
+                    </div>
+                    <button class="btn-save">Save Changes</button>
+                </div>
+            </div>
+
+            <div id="orders" class="tab-content">
+                <h3>Order History</h3>
+                <div class="order-item">
+                    <div>
+                        <strong>Order #ORD123456</strong>
+                        <p style="color: #999; font-size: 14px;">Jan 20, 2025</p>
+                        <p>3 items - Premium Running Shoes, T-Shirt, Jeans</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <div class="order-status">Delivered</div>
+                        <p style="font-size: 14px; color: #666;">$169.97</p>
+                        <a href="track-order.html" style="color: #F7941D; text-decoration: none;">Track</a>
+                    </div>
+                </div>
+                <div class="order-item">
+                    <div>
+                        <strong>Order #ORD123455</strong>
+                        <p style="color: #999; font-size: 14px;">Jan 15, 2025</p>
+                        <p>1 item - Winter Jacket</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <div class="order-status">Shipped</div>
+                        <p style="font-size: 14px; color: #666;">$149.99</p>
+                        <a href="track-order.html" style="color: #F7941D; text-decoration: none;">Track</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="reviews" class="tab-content">
+                <h3>My Reviews & Comments</h3>
+                <div class="review-item">
+                    <div class="review-header">
+                        <strong>Premium Running Shoes</strong>
+                        <div class="review-rating">★★★★★</div>
+                    </div>
+                    <p>Excellent quality and very comfortable. Would recommend to everyone!</p>
+                    <small style="color: #999;">Posted on Jan 22, 2025</small>
+                </div>
+                <div class="review-item">
+                    <div class="review-header">
+                        <strong>Winter Jacket</strong>
+                        <div class="review-rating">★★★★☆</div>
+                    </div>
+                    <p>Great product, only minor issue with the zipper. Still very happy with it.</p>
+                    <small style="color: #999;">Posted on Jan 18, 2025</small>
+                </div>
+            </div>
+
+            <div id="wishlist" class="tab-content">
+                <h3>My Wishlist</h3>
+                <p><a href="wishlist.html">View full wishlist</a></p>
+            </div>
+
+            <div id="notifications" class="tab-content">
+                <h3>Notifications & Messages</h3>
+                <div style="background: #f0f8ff; padding: 15px; border-radius: 4px; margin-bottom: 15px;">
+                    <strong>Order Delivered!</strong>
+                    <p>Your order #ORD123456 has been delivered. Thank you for shopping with us!</p>
+                    <small>2 hours ago</small>
+                </div>
+                <div style="background: #f0f8ff; padding: 15px; border-radius: 4px; margin-bottom: 15px;">
+                    <strong>Special Offer!</strong>
+                    <p>Get 20% off on winter collection. Use code WINTER20</p>
+                    <small>1 day ago</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-area footer" style="margin-top: 50px;">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6"><div class="single-footer"><h4>About</h4><p>Premium online shopping</p></div></div>
+                    <div class="col-lg-3 col-md-6"><div class="single-footer links"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="products.html">Products</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div></div>
+                    <div class="col-lg-3 col-md-6"><div class="single-footer links"><h4>Support</h4><ul><li><a href="#">FAQ</a></li><li><a href="#">Returns</a></li><li><a href="#">Shipping</a></li></ul></div></div>
+                    <div class="col-lg-3 col-md-6"><div class="single-footer"><h4>Contact</h4><ul><li>Email: info@eshop.com</li><li>Phone: +1-800-ESHOP</li></ul></div></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>

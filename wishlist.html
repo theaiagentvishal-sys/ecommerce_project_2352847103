@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist - E-SHOP</title>
+    <link rel="icon" type="image/png" href="public/images/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="public/bootstrap.css">
+    <link rel="stylesheet" href="public/font-awesome.css">
+    <link rel="stylesheet" href="public/fe/themify-icons.css">
+    <link rel="stylesheet" href="public/fe/style.css">
+    <style>
+        .wishlist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; padding: 50px 0; min-height: 600px; }
+        .wishlist-item { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .wishlist-item:hover { transform: translateY(-5px); }
+        .item-image { width: 100%; height: 200px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; }
+        .item-image img { width: 100%; height: 100%; object-fit: cover; }
+        .item-info { padding: 15px; }
+        .item-name { font-weight: 600; margin-bottom: 5px; }
+        .item-price { color: #F7941D; font-weight: 600; font-size: 18px; margin-bottom: 10px; }
+        .item-actions { display: flex; gap: 10px; }
+        .btn-small { flex: 1; padding: 8px; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; }
+        .btn-add { background: #F7941D; color: #fff; }
+        .btn-remove { background: #ff6b6b; color: #fff; }
+        .empty-wishlist { text-align: center; padding: 100px 20px; }
+    </style>
+</head>
+<body>
+    <header class="header shop">
+        <div class="topbar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6"><div class="left-content"><ul class="list-main"><li><i class="ti-location-pin"></i> <span>London Oxford Street, UK</span></li></ul></div></div>
+                    <div class="col-lg-6"><div class="right-content"><ul class="list-main"><li><a href="track-order.html">Track Order</a></li><li><a href="login.html">Login</a> / <a href="register.html">Register</a></li></ul></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="middle-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2"><div class="logo"><a href="index.html"><img src="public/images/logo.jpg" alt="logo"></a></div></div>
+                    <div class="col-lg-8"><div class="search-bar-top"><div class="search-bar"><form><input placeholder="Search..." type="search"><button class="btnn"><i class="ti-search"></i></button></form></div></div></div>
+                    <div class="col-lg-2"><div class="right-bar"><div class="sinlge-bar shopping"><a href="wishlist.html"><i class="fa fa-heart"></i> <span class="total-count" id="wishlistCount">0</span></a></div><div class="sinlge-bar shopping"><a href="cart.html"><i class="ti-bag"></i> <span class="total-count" id="cartCount">0</span></a></div></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="header-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12"><div class="menu-area"><nav class="navbar navbar-expand-lg"><div class="navbar-collapse"><ul class="nav main-menu navbar-nav"><li><a href="index.html">Home</a></li><li><a href="products.html">Products</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li><li><a href="admin-dashboard.html">Admin</a></li></ul></div></nav></div></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2 style="padding: 50px 0 20px;">My Wishlist</h2>
+        <div class="wishlist-grid" id="wishlistContainer"></div>
+    </div>
+
+    <footer class="footer-area footer" style="margin-top: 50px;">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6"><div class="single-footer"><h4>About</h4><p>Premium online shopping destination</p></div></div>
+                    <div class="col-lg-3 col-md-6"><div class="single-footer links"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="products.html">Products</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div></div>
+                    <div class="col-lg-3 col-md-6"><div class="single-footer links"><h4>Support</h4><ul><li><a href="#">FAQ</a></li><li><a href="#">Returns</a></li><li><a href="#">Shipping</a></li><li><a href="#">Privacy</a></li></ul></div></div>
+                    <div class="col-lg-3 col-md-6"><div class="single-footer"><h4>Contact</h4><ul><li>Email: info@eshop.com</li><li>Phone: +1-800-ESHOP</li></ul></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright"><div class="container"><p>&copy; 2025 E-SHOP. All Rights Reserved.</p></div></div>
+    </footer>
+
+    <script>
+        function loadWishlist() {
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            const container = document.getElementById('wishlistContainer');
+            
+            if (wishlist.length === 0) {
+                container.innerHTML = '<div class="empty-wishlist"><h3>Your wishlist is empty</h3><p><a href="products.html">Browse products</a></p></div>';
+                return;
+            }
+            
+            let html = '';
+            wishlist.forEach((item, index) => {
+                html += `
+                    <div class="wishlist-item">
+                        <div class="item-image">
+                            <img src="https://via.placeholder.com/250/F7941D/FFFFFF?text=${item.name}" alt="${item.name}">
+                        </div>
+                        <div class="item-info">
+                            <div class="item-name">${item.name}</div>
+                            <div class="item-price">$${item.price}</div>
+                            <div class="item-actions">
+                                <button class="btn-small btn-add" onclick="addToCart(${index})">Add to Cart</button>
+                                <button class="btn-small btn-remove" onclick="removeFromWishlist(${index})">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            document.getElementById('wishlistCount').textContent = wishlist.length;
+        }
+        
+        function removeFromWishlist(index) {
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            wishlist.splice(index, 1);
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            loadWishlist();
+        }
+        
+        function addToCart(index) {
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            const item = wishlist[index];
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            const existing = cart.find(c => c.name === item.name);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({...item, quantity: 1});
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert('Item added to cart!');
+            window.location.href = 'cart.html';
+        }
+        
+        loadWishlist();
+    </script>
+</body>
+</html>

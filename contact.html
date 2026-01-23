@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - E-SHOP</title>
+    <link rel="icon" type="image/png" href="public/images/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="public/bootstrap.css">
+    <link rel="stylesheet" href="public/font-awesome.css">
+    <link rel="stylesheet" href="public/fe/themify-icons.css">
+    <link rel="stylesheet" href="public/fe/style.css">
+    <style>
+        .contact-container { padding: 50px 0; min-height: 600px; }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 50px; }
+        .contact-info { background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .contact-form-box { background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .info-item { margin-bottom: 30px; display: flex; gap: 20px; }
+        .info-icon { width: 60px; height: 60px; background: #F7941D; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+        .info-content h4 { margin: 0; font-weight: 600; margin-bottom: 5px; }
+        .info-content p { margin: 0; color: #666; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Poppins', sans-serif; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #F7941D; box-shadow: 0 0 5px rgba(247, 148, 29, 0.3); }
+        .btn-submit { background: #F7941D; color: #fff; padding: 12px 30px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: 600; width: 100%; }
+        .btn-submit:hover { background: #e68a1f; }
+        .map-container { width: 100%; height: 400px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        .faq-section { background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        .faq-item { margin-bottom: 20px; }
+        .faq-question { background: #f5f5f5; padding: 15px; border-radius: 4px; cursor: pointer; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+        .faq-question:hover { background: #efefef; }
+        .faq-answer { background: #fff; padding: 15px; border-left: 4px solid #F7941D; display: none; }
+        .faq-answer.active { display: block; }
+        .social-links { display: flex; gap: 15px; margin-top: 20px; }
+        .social-links a { width: 40px; height: 40px; background: #F7941D; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; }
+        @media (max-width: 768px) {
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header shop">
+        <div class="topbar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6"><div class="left-content"><ul class="list-main"><li><i class="ti-location-pin"></i> <span>London Oxford Street, UK</span></li></ul></div></div>
+                    <div class="col-lg-6"><div class="right-content"><ul class="list-main"><li><a href="track-order.html">Track Order</a></li><li><a href="login.html">Login</a> / <a href="register.html">Register</a></li></ul></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="middle-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2"><div class="logo"><a href="index.html"><img src="public/images/logo.jpg" alt="logo"></a></div></div>
+                    <div class="col-lg-8"><div class="search-bar-top"><div class="search-bar"><form><input placeholder="Search..." type="search"><button class="btnn"><i class="ti-search"></i></button></form></div></div></div>
+                    <div class="col-lg-2"><div class="right-bar"><div class="sinlge-bar shopping"><a href="wishlist.html"><i class="fa fa-heart-o"></i> <span class="total-count">0</span></a></div><div class="sinlge-bar shopping"><a href="cart.html"><i class="ti-bag"></i> <span class="total-count">0</span></a></div></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="header-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12"><div class="menu-area"><nav class="navbar navbar-expand-lg"><div class="navbar-collapse"><ul class="nav main-menu navbar-nav"><li><a href="index.html">Home</a></li><li><a href="products.html">Products</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li><li><a href="admin-dashboard.html">Admin</a></li></ul></div></nav></div></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="contact-container">
+        <div class="container">
+            <h2 style="margin-bottom: 40px; text-align: center;">Contact Us</h2>
+
+            <div class="contact-grid">
+                <div>
+                    <div class="contact-info">
+                        <h3 style="margin-bottom: 30px;">Get in Touch</h3>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="ti-location-pin"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Address</h4>
+                                <p>123 Oxford Street<br>London, UK<br>SW1A 1AA</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="ti-mobile"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Phone</h4>
+                                <p>+44 (0) 800 123 4567<br>+1 800 ESHOP (1-800-374-6678)</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="ti-email"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Email</h4>
+                                <p>info@eshop.com<br>support@eshop.com</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="ti-time"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Business Hours</h4>
+                                <p>Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM<br>Sunday: Closed</p>
+                            </div>
+                        </div>
+
+                        <h4 style="margin-top: 30px; margin-bottom: 15px;">Follow Us</h4>
+                        <div class="social-links">
+                            <a href="#" title="Facebook"><i class="fa fa-facebook"></i></a>
+                            <a href="#" title="Twitter"><i class="fa fa-twitter"></i></a>
+                            <a href="#" title="Instagram"><i class="fa fa-instagram"></i></a>
+                            <a href="#" title="YouTube"><i class="fa fa-youtube"></i></a>
+                            <a href="#" title="LinkedIn"><i class="fa fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="contact-form-box">
+                        <h3 style="margin-bottom: 20px;">Send us a Message</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject">Subject *</label>
+                                <input type="text" id="subject" name="subject" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category">Category</label>
+                                <select id="category" name="category" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
+                                    <option>General Inquiry</option>
+                                    <option>Product Question</option>
+                                    <option>Order Issue</option>
+                                    <option>Feedback</option>
+                                    <option>Partnership</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Message *</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-submit">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map -->
+            <div class="map-container" style="margin-bottom: 50px;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.6048843953154!2d-0.13589502346926764!3d51.50927937156285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604c38c8cd809%3A0xb78f1ce6f5113ddf!2s123%20Oxford%20Street%2C%20London!5e0!3m2!1sen!2suk!4v" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <h3>Frequently Asked Questions</h3>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>What is your return policy?</span>
+                        <span style="font-size: 20px;">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer a 30-day return policy on all unused items in original packaging. Items must be in resalable condition. Once received and inspected, refunds are processed within 5-7 business days.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>How long does shipping take?</span>
+                        <span style="font-size: 20px;">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Standard shipping takes 5-7 business days. Express shipping takes 2-3 business days. Overnight delivery is available in select areas. All orders include tracking information.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Do you offer international shipping?</span>
+                        <span style="font-size: 20px;">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we ship to over 150 countries worldwide. International shipping rates vary based on destination and weight. Customs and duties may apply and are the responsibility of the customer.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>What payment methods do you accept?</span>
+                        <span style="font-size: 20px;">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept PayPal, credit cards (Visa, Mastercard, American Express), debit cards, and bank transfers. All payments are processed securely using industry-standard encryption.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>How can I track my order?</span>
+                        <span style="font-size: 20px;">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can track your order using the tracking number sent to your email. Visit our <a href="track-order.html">Track Order</a> page and enter your Order ID and email address to get real-time updates.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-area footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6"><div class="single-footer"><h4>About</h4><p>Premium online shopping experience</p></div></div>
+                    <div class="col-lg-3 col-md-6"><div class="single-footer links"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="products.html">Products</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div></div>
+                    <div class="col-lg-3 col-md-6"><div class="single-footer links"><h4>Support</h4><ul><li><a href="#">FAQ</a></li><li><a href="#">Returns</a></li><li><a href="#">Shipping</a></li></ul></div></div>
+                    <div class="col-lg-3 col-md-6"><div class="single-footer"><h4>Contact</h4><ul><li>Email: info@eshop.com</li><li>Phone: +1-800-ESHOP</li></ul></div></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('span:last-child');
+            
+            document.querySelectorAll('.faq-answer').forEach(el => {
+                if (el !== answer) el.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.faq-question span:last-child').forEach(el => {
+                if (el !== icon) el.textContent = '+';
+            });
+            
+            answer.classList.toggle('active');
+            icon.textContent = answer.classList.contains('active') ? '−' : '+';
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

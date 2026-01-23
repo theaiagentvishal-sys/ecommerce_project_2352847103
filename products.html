@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - E-SHOP</title>
+    <link rel="icon" type="image/png" href="public/images/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="public/bootstrap.css">
+    <link rel="stylesheet" href="public/font-awesome.css">
+    <link rel="stylesheet" href="public/fe/themify-icons.css">
+    <link rel="stylesheet" href="public/fe/style.css">
+    <style>
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; padding: 50px 0; }
+        .product-card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .product-card:hover { transform: translateY(-5px); }
+        .product-image { width: 100%; height: 200px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; position: relative; }
+        .product-image img { width: 100%; height: 100%; object-fit: cover; }
+        .wishlist-badge { position: absolute; top: 10px; right: 10px; background: #fff; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .product-info { padding: 15px; }
+        .product-name { font-weight: 600; margin-bottom: 5px; }
+        .product-rating { color: #FFC107; font-size: 12px; margin-bottom: 5px; }
+        .product-price { color: #F7941D; font-weight: 600; font-size: 18px; margin-bottom: 10px; }
+        .btn-add-cart { background: #F7941D; color: #fff; padding: 10px; width: 100%; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; }
+        .filter-sidebar { background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .filter-group { margin-bottom: 20px; }
+        .filter-group h4 { margin-bottom: 10px; font-weight: 600; }
+        .filter-option { margin-bottom: 8px; }
+        .filter-option input { margin-right: 8px; }
+    </style>
+</head>
+<body>
+    <header class="header shop">
+        <div class="topbar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6"><div class="left-content"><ul class="list-main"><li><i class="ti-location-pin"></i> <span>London Oxford Street, UK</span></li></ul></div></div>
+                    <div class="col-lg-6"><div class="right-content"><ul class="list-main"><li><a href="track-order.html">Track Order</a></li><li><a href="login.html">Login</a> / <a href="register.html">Register</a></li></ul></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="middle-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2"><div class="logo"><a href="index.html"><img src="public/images/logo.jpg" alt="logo"></a></div></div>
+                    <div class="col-lg-8"><div class="search-bar-top"><div class="search-bar"><form><input placeholder="Search..." type="search"><button class="btnn"><i class="ti-search"></i></button></form></div></div></div>
+                    <div class="col-lg-2"><div class="right-bar"><div class="sinlge-bar shopping"><a href="wishlist.html"><i class="fa fa-heart-o"></i> <span class="total-count" id="wishlistCount">0</span></a></div><div class="sinlge-bar shopping"><a href="cart.html"><i class="ti-bag"></i> <span class="total-count" id="cartCount">0</span></a></div></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="header-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12"><div class="menu-area"><nav class="navbar navbar-expand-lg"><div class="navbar-collapse"><ul class="nav main-menu navbar-nav"><li><a href="index.html">Home</a></li><li><a href="products.html">Products</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li><li><a href="admin-dashboard.html">Admin</a></li></ul></div></nav></div></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" style="padding: 50px 0;">
+        <div class="row">
+            <div class="col-lg-3 col-md-4">
+                <div class="filter-sidebar">
+                    <div class="filter-group">
+                        <h4>Category</h4>
+                        <div class="filter-option"><input type="checkbox" value="footwear"> Footwear</div>
+                        <div class="filter-option"><input type="checkbox" value="garments"> Garments</div>
+                        <div class="filter-option"><input type="checkbox" value="accessories"> Accessories</div>
+                    </div>
+                    <div class="filter-group">
+                        <h4>Price Range</h4>
+                        <div class="filter-option"><input type="checkbox" value="0-50"> $0 - $50</div>
+                        <div class="filter-option"><input type="checkbox" value="50-100"> $50 - $100</div>
+                        <div class="filter-option"><input type="checkbox" value="100+"> $100+</div>
+                    </div>
+                    <div class="filter-group">
+                        <h4>Rating</h4>
+                        <div class="filter-option"><input type="checkbox" value="5"> ★★★★★ (5 Star)</div>
+                        <div class="filter-option"><input type="checkbox" value="4"> ★★★★☆ (4+ Star)</div>
+                        <div class="filter-option"><input type="checkbox" value="3"> ★★★☆☆ (3+ Star)</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-8">
+                <h2 style="margin-bottom: 30px;">All Products</h2>
+                <div class="products-grid" id="productsGrid"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-area footer" style="margin-top: 50px;">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6"><div class="single-footer"><h4>About</h4><p>Premium online shopping</p></div></div>
+                    <div class="col-lg-3 col-md-6"><div class="single-footer links"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="products.html">Products</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div></div>
+                    <div class="col-lg-3 col-md-6"><div class="single-footer links"><h4>Support</h4><ul><li><a href="#">FAQ</a></li><li><a href="#">Returns</a></li><li><a href="#">Shipping</a></li></ul></div></div>
+                    <div class="col-lg-3 col-md-6"><div class="single-footer"><h4>Contact</h4><ul><li>Email: info@eshop.com</li><li>Phone: +1-800-ESHOP</li></ul></div></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const products = [
+            {name: 'Premium Running Shoes', price: 89.99, rating: 5, category: 'footwear'},
+            {name: 'Casual Comfort Shoes', price: 79.99, rating: 4, category: 'footwear'},
+            {name: 'Classic Cotton T-Shirt', price: 29.99, rating: 5, category: 'garments'},
+            {name: 'Premium Denim Jeans', price: 59.99, rating: 4, category: 'garments'},
+            {name: 'Sport Athletic Shoes', price: 99.99, rating: 5, category: 'footwear'},
+            {name: 'Stylish Winter Jacket', price: 149.99, rating: 4, category: 'garments'},
+            {name: 'Leather Belt', price: 39.99, rating: 4, category: 'accessories'},
+            {name: 'Sports Socks Pack', price: 19.99, rating: 5, category: 'accessories'},
+            {name: 'Summer Dress', price: 69.99, rating: 5, category: 'garments'},
+            {name: 'Hiking Boots', price: 129.99, rating: 4, category: 'footwear'},
+            {name: 'Casual Polo Shirt', price: 45.99, rating: 4, category: 'garments'},
+            {name: 'Sports Cap', price: 24.99, rating: 5, category: 'accessories'}
+        ];
+
+        function renderProducts() {
+            let html = '';
+            products.forEach((product, index) => {
+                const stars = '★'.repeat(product.rating) + '☆'.repeat(5-product.rating);
+                html += `
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://via.placeholder.com/250/F7941D/FFFFFF?text=${encodeURIComponent(product.name)}" alt="${product.name}">
+                            <div class="wishlist-badge" onclick="addToWishlist('${product.name}', ${product.price})">
+                                <i class="fa fa-heart-o"></i>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">${product.name}</div>
+                            <div class="product-rating">${stars}</div>
+                            <div class="product-price">$${product.price}</div>
+                            <button class="btn-add-cart" onclick="addToCart('${product.name}', ${product.price})">Add to Cart</button>
+                        </div>
+                    </div>
+                `;
+            });
+            document.getElementById('productsGrid').innerHTML = html;
+            updateCounts();
+        }
+
+        function addToCart(name, price) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existing = cart.find(item => item.name === name);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({name, price, quantity: 1});
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert('Added to cart!');
+            updateCounts();
+        }
+
+        function addToWishlist(name, price) {
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            if (!wishlist.find(item => item.name === name)) {
+                wishlist.push({name, price});
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                alert('Added to wishlist!');
+            } else {
+                alert('Already in wishlist!');
+            }
+            updateCounts();
+        }
+
+        function updateCounts() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            document.getElementById('cartCount').textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('wishlistCount').textContent = wishlist.length;
+        }
+
+        renderProducts();
+    </script>
+</body>
+</html>
