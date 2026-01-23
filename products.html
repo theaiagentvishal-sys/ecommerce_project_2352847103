@@ -112,6 +112,30 @@ function renderProducts(){
 }
 
 renderProducts();
+
+// Track product views
+function trackProductView(productName) {
+    ShoppingExperience.trackView(productName);
+    console.log('Product viewed:', productName);
+}
+
+// Add to wishlist
+function addToWishlist(productName, price) {
+    if (!UserSession.isLoggedIn()) {
+        window.location.href = 'login.html';
+        return false;
+    }
+    let wishlist = JSON.parse(localStorage.getItem('wishlist_' + UserSession.getCurrentUser().userId) || '[]');
+    const exists = wishlist.find(item => item.name === productName);
+    if (!exists) {
+        wishlist.push({name: productName, price: price, addedAt: new Date().toISOString()});
+        localStorage.setItem('wishlist_' + UserSession.getCurrentUser().userId, JSON.stringify(wishlist));
+        alert('✓ Added to Wishlist');
+    } else {
+        alert('Already in Wishlist');
+    }
+    return true;
+}
     </script>
 </body>
 </html>

@@ -128,7 +128,28 @@
             <div id="products" class="section">
                 <div class="dashboard-header">
                     <h2>Products Management</h2>
-                    <button class="btn btn-primary" onclick="alert('Add Product form would open')">+ Add Product</button>
+                    <button class="btn btn-primary" onclick="showAddProductForm()">+ Add Product</button>
+                </div>
+                <div id="addProductFormContainer" style="display:none;background:#fff;padding:20px;border-radius:6px;margin-bottom:20px;box-shadow:0 2px 4px rgba(0,0,0,.05)">
+                    <h3 style="margin-bottom:15px;color:#333">Add New Product</h3>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:15px">
+                        <input type="text" id="productName" placeholder="Product Name" style="padding:10px;border:1px solid #ddd;border-radius:4px;font-size:13px">
+                        <input type="number" id="productPrice" placeholder="Price" style="padding:10px;border:1px solid #ddd;border-radius:4px;font-size:13px">
+                        <select id="productCategory" style="padding:10px;border:1px solid #ddd;border-radius:4px;font-size:13px">
+                            <option>Select Category</option>
+                            <option value="footwear">Footwear</option>
+                            <option value="garments">Garments</option>
+                            <option value="accessories">Accessories</option>
+                        </select>
+                        <input type="number" id="productStock" placeholder="Stock" style="padding:10px;border:1px solid #ddd;border-radius:4px;font-size:13px">
+                        <input type="text" id="productImage" placeholder="Image URL" style="padding:10px;border:1px solid #ddd;border-radius:4px;font-size:13px">
+                        <input type="number" id="productRating" placeholder="Rating (1-5)" min="1" max="5" style="padding:10px;border:1px solid #ddd;border-radius:4px;font-size:13px">
+                    </div>
+                    <textarea id="productDescription" placeholder="Product Description" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:4px;font-size:13px;margin-bottom:15px;height:80px"></textarea>
+                    <div style="display:flex;gap:10px">
+                        <button class="btn btn-primary" onclick="saveNewProduct()">Save Product</button>
+                        <button class="btn" style="background:#999;color:#fff" onclick="closeAddProductForm()">Cancel</button>
+                    </div>
                 </div>
                 <table>
                     <thead>
@@ -138,18 +159,11 @@
                             <th>Category</th>
                             <th>Price</th>
                             <th>Stock</th>
+                            <th>Rating</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="productsTable">
-                        <tr>
-                            <td>#P001</td>
-                            <td>Premium Running Shoes</td>
-                            <td>Footwear</td>
-                            <td>$89.99</td>
-                            <td>42</td>
-                            <td><button class="btn btn-view" onclick="alert('Edit product')">Edit</button></td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
