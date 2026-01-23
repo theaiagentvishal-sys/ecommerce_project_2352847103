@@ -70,8 +70,9 @@
                     <div class="col-lg-6 col-md-12">
                         <div class="right-content">
                             <ul class="list-main">
-                                <li><i class="ti-location-pin"></i> <a href="track-order.html">Track Order</a></li>
-                                <li><i class="ti-power-off"></i><a href="login.html">Login</a> / <a href="register.html">Register</a></li>
+                                <li id="userStatusDisplay" style="display:none"><i class="ti-user"></i> <a href="profile.html"><span style="color:#27ae60;font-weight:600" id="userNameDisplay">User</span></a> | <a href="javascript:void(0)" onclick="handleLogout()" style="color:#e74c3c">Logout</a></li>
+                                <li id="guestDisplay"><a href="track-order.html">Track Order</a></li>
+                                <li id="guestDisplay2"><a href="login.html">Login</a> / <a href="register.html">Register</a></li>
                             </ul>
                         </div>
                     </div>
