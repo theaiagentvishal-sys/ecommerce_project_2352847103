@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>E-Commerce Diagnostic Tool</title>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #1e1e1e; color: #d4d4d4; }
+        .test-section { margin: 20px 0; padding: 15px; border-left: 3px solid #007acc; background: #252526; }
+        .pass { color: #4ec9b0; }
+        .fail { color: #f48771; }
+        .info { color: #9cdcfe; }
+        .warning { color: #ce9178; }
+        button { background: #007acc; color: white; border: none; padding: 10px 20px; cursor: pointer; margin: 5px; }
+        button:hover { background: #1084d7; }
+        .output { background: #1e1e1e; padding: 10px; margin-top: 10px; max-height: 300px; overflow-y: auto; border: 1px solid #333; }
+    </style>
+</head>
+<body>
+    <h1>🔧 E-Commerce Diagnostic Tool</h1>
+    
+    <div class="test-section">
+        <h2>1️⃣  Environment Check</h2>
+        <button onclick="checkEnvironment()">Run Check</button>
+        <div id="envOutput" class="output"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2️⃣  LocalStorage Check</h2>
+        <button onclick="checkLocalStorage()">Run Check</button>
+        <div id="storageOutput" class="output"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3️⃣  Auth System Check</h2>
+        <button onclick="checkAuthSystem()">Run Check</button>
+        <div id="authOutput" class="output"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>4️⃣  Simulate Login</h2>
+        <label>Username: <input id="testUsername" value="user1" style="color: #1e1e1e; padding: 5px;"></label>
+        <label>Password: <input id="testPassword" type="password" value="password123" style="color: #1e1e1e; padding: 5px;"></label>
+        <button onclick="simulateLogin()">Simulate Login</button>
+        <div id="loginOutput" class="output"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>5️⃣  Session Persistence Check</h2>
+        <button onclick="checkSessionPersistence()">Check Session</button>
+        <div id="sessionOutput" class="output"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>6️⃣  Clear All Data</h2>
+        <button onclick="clearAllData()" style="background: #d16969;">Clear LocalStorage</button>
+        <div id="clearOutput" class="output"></div>
+    </div>
+
+    <script>
+        function log(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            const span = document.createElement('div');
+            span.className = type;
+            span.textContent = message;
+            element.appendChild(span);
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+
+        function checkEnvironment() {
+            const output = 'envOutput';
+            document.getElementById(output).innerHTML = '';
+            
+            log(output, '✓ Browser detected: ' + navigator.userAgent.substring(0, 50), 'pass');
+            log(output, '✓ LocalStorage available: ' + (typeof(Storage) !== "undefined"), 'pass');
+            log(output, '✓ JavaScript enabled: true', 'pass');
+            log(output, '✓ Current URL: ' + window.location.href, 'info');
+            log(output, '✓ Document ready: ' + (document.readyState), 'info');
+        }
+
+        function checkLocalStorage() {
+            const output = 'storageOutput';
+            document.getElementById(output).innerHTML = '';
+            
+            try {
+                const keys = Object.keys(localStorage);
+                log(output, `✓ LocalStorage has ${keys.length} keys`, 'pass');
+                
+                keys.forEach(key => {
+                    const value = localStorage.getItem(key);
+                    const display = value.length > 30 ? value.substring(0, 30) + '...' : value;
+                    log(output, `  • ${key}: ${display}`, 'info');
+                });
+                
+                if (keys.length === 0) {
+                    log(output, '⚠ LocalStorage is empty (no session data)', 'warning');
+                }
+            } catch (e) {
+                log(output, '✗ Error: ' + e.message, 'fail');
+            }
+        }
+
+        function checkAuthSystem() {
+            const output = 'authOutput';
+            document.getElementById(output).innerHTML = '';
+            
+            try {
+                if (typeof UserSession !== 'undefined') {
+                    log(output, '✓ UserSession object exists', 'pass');
+                    log(output, '✓ UserSession.isLoggedIn(): ' + UserSession.isLoggedIn(), 'pass');
+                    
+                    const user = UserSession.getCurrentUser();
+                    log(output, `✓ Current user: ${user.username || 'none'}`, 'info');
+                    log(output, `✓ User type: ${user.userType || 'none'}`, 'info');
+                } else {
+                    log(output, '✗ UserSession NOT defined', 'fail');
+                    log(output, '⚠ Auth.js may not have loaded', 'warning');
+                }
+            } catch (e) {
+                log(output, '✗ Error: ' + e.message, 'fail');
+            }
+        }
+
+        function simulateLogin() {
+            const output = 'loginOutput';
+            document.getElementById(output).innerHTML = '';
+            
+            const username = document.getElementById('testUsername').value;
+            const password = document.getElementById('testPassword').value;
+            
+            try {
+                log(output, `Attempting login: ${username} / ${'*'.repeat(password.length)}`, 'info');
+                
+                if (typeof UserSession === 'undefined') {
+                    log(output, '✗ UserSession not available!', 'fail');
+                    return;
+                }
+                
+                // Validate credentials
+                if ((username === 'user1' || username === 'user2') && password === 'password123') {
+                    const userId = username === 'user1' ? 'U001' : 'U002';
+                    log(output, '✓ Credentials valid', 'pass');
+                    log(output, 'Calling UserSession.saveSession()...', 'info');
+                    
+                    UserSession.saveSession(username, userId, 'user');
+                    
+                    log(output, '✓ Session saved to localStorage', 'pass');
+                    checkLocalStorage();
+                    
+                    // Verify it was saved
+                    setTimeout(() => {
+                        const savedUser = localStorage.getItem('username');
+                        if (savedUser === username) {
+                            log(output, `✓ Session verified: ${savedUser}`, 'pass');
+                        } else {
+                            log(output, `✗ Session verification failed. Expected: ${username}, Got: ${savedUser}`, 'fail');
+                        }
+                    }, 100);
+                } else if (username === 'admin' && password === 'admin@123') {
+                    log(output, '✓ Admin credentials valid', 'pass');
+                    UserSession.saveSession(username, 'ADMIN001', 'admin');
+                    log(output, '✓ Admin session saved', 'pass');
+                } else {
+                    log(output, '✗ Invalid credentials', 'fail');
+                    log(output, 'Valid users: user1, user2 (pass: password123) or admin (pass: admin@123)', 'info');
+                }
+            } catch (e) {
+                log(output, '✗ Error during login: ' + e.message, 'fail');
+                console.error(e);
+            }
+        }
+
+        function checkSessionPersistence() {
+            const output = 'sessionOutput';
+            document.getElementById(output).innerHTML = '';
+            
+            try {
+                const isLoggedIn = localStorage.getItem('isLoggedIn');
+                const username = localStorage.getItem('username');
+                const userType = localStorage.getItem('userType');
+                
+                if (isLoggedIn === 'true') {
+                    log(output, `✓ Active session found`, 'pass');
+                    log(output, `  Username: ${username}`, 'info');
+                    log(output, `  Type: ${userType}`, 'info');
+                    log(output, `✓ Session would persist across page refresh`, 'pass');
+                } else {
+                    log(output, '⚠ No active session', 'warning');
+                    log(output, 'Please login first (see section 4)', 'info');
+                }
+            } catch (e) {
+                log(output, '✗ Error: ' + e.message, 'fail');
+            }
+        }
+
+        function clearAllData() {
+            const output = 'clearOutput';
+            document.getElementById(output).innerHTML = '';
+            
+            try {
+                localStorage.clear();
+                log(output, '✓ All localStorage data cleared', 'pass');
+                log(output, '✓ Session has been reset', 'pass');
+                log(output, '⚠ You will need to login again', 'warning');
+            } catch (e) {
+                log(output, '✗ Error: ' + e.message, 'fail');
+            }
+        }
+
+        // Auto-check on load
+        window.addEventListener('load', () => {
+            log('envOutput', '🔄 Initializing diagnostic tool...', 'info');
+            checkEnvironment();
+            checkAuthSystem();
+        });
+    </script>
+</body>
+</html>
