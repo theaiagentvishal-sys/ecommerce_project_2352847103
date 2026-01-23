@@ -32,8 +32,22 @@ const ShoppingFlow = {
 
     // Smooth login prompt with minimal friction
     showLoginPrompt() {
-        // Redirect to login page
-        window.location.href = 'login.html';
+        const message = `
+            <div style="text-align: center; padding: 20px;">
+                <h3 style="margin-bottom: 15px;">🔐 Login Required</h3>
+                <p style="margin-bottom: 20px;">Quick login to continue shopping</p>
+                <div style="display: grid; gap: 10px; max-width: 300px; margin: 0 auto;">
+                    <button style="padding: 12px; background: #667eea; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;" onclick="window.location.href = 'login.html'">
+                        📧 Login / Register
+                    </button>
+                    <button style="padding: 12px; background: #f0f0f0; color: #333; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;" onclick="quickUserLogin('user1')">
+                        ⚡ Quick Login (Demo)
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        alert(message);
     },
 
     // Beautiful cart notification
