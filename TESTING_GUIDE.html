@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Test Guide - Verify All Fixes</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+        h2 {
+            color: #764ba2;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        .test-section {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+        }
+        .credentials {
+            background: #e8f5e9;
+            border-left: 4px solid #27ae60;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+        }
+        .credentials h3 {
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+        .credentials p {
+            margin: 5px 0;
+            font-family: monospace;
+            background: white;
+            padding: 8px;
+            border-radius: 4px;
+            word-break: break-all;
+        }
+        .step {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border-left: 4px solid #F7941D;
+        }
+        .step-num {
+            display: inline-block;
+            background: #F7941D;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .expected {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        .fix-info {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+        }
+        .fix-info h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        .fix-info p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .files-changed {
+            background: #f3e5f5;
+            border-left: 4px solid #9c27b0;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+        }
+        .files-changed h3 {
+            color: #7b1fa2;
+            margin-bottom: 10px;
+        }
+        .files-changed ul {
+            margin-left: 20px;
+        }
+        .files-changed li {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .nav-link {
+            display: inline-block;
+            padding: 12px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .nav-link:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .checklist {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .checklist-item label {
+            cursor: pointer;
+            margin: 0;
+            flex: 1;
+        }
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 13px;
+        }
+        .success { color: #27ae60; font-weight: bold; }
+        .warning { color: #f39c12; font-weight: bold; }
+        .error { color: #e74c3c; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 E-Commerce Test & Verification Guide</h1>
+        <p style="color: #666; margin-bottom: 20px;">Complete guide to verify all recent fixes for product images, login, and add-to-cart functionality.</p>
+
+        <!-- Summary of Fixes -->
+        <h2>📋 Summary of Fixes Applied</h2>
+        <div class="files-changed">
+            <h3>✅ Files Modified</h3>
+            <ul>
+                <li><strong>products.html</strong> - Fixed product image rendering with Unsplash URLs and placeholder fallback</li>
+                <li><strong>shopping-flow.js</strong> - Fixed login redirect for add-to-cart to use window.location.href instead of alert</li>
+                <li><strong>cart.html</strong> - Added user status display and auth functions (updateUserStatus, handleLogout)</li>
+            </ul>
+        </div>
+
+        <!-- Fix Details -->
+        <h2>🔧 Fix Details</h2>
+        
+        <div class="fix-info">
+            <h3>Fix #1: Product Images</h3>
+            <p><strong>Issue:</strong> Product images not displaying on products.html</p>
+            <p><strong>Solution:</strong> Updated renderProducts() function to include Unsplash URLs with fallback</p>
+            <p><strong>Code:</strong> <code>src="${product.img || placeholder}"</code> with <code>onerror</code> handler</p>
+            <p><strong>Expected Result:</strong> All 12 product images display with professional product photos from Unsplash. If image fails to load, placeholder text appears.</p>
+        </div>
+
+        <div class="fix-info">
+            <h3>Fix #2: Login Redirect</h3>
+            <p><strong>Issue:</strong> Login prompt not redirecting properly when clicking add-to-cart</p>
+            <p><strong>Solution:</strong> Changed showLoginPrompt() in shopping-flow.js to use direct redirect</p>
+            <p><strong>Code Change:</strong> From alert dialog to <code>window.location.href = 'login.html'</code></p>
+            <p><strong>Expected Result:</strong> Clicking add-to-cart while logged out redirects directly to login.html with smooth transition.</p>
+        </div>
+
+        <div class="fix-info">
+            <h3>Fix #3: Cart Auth Functions</h3>
+            <p><strong>Issue:</strong> Cart page not displaying user status or logout button</p>
+            <p><strong>Solution:</strong> Added updateUserStatus() and handleLogout() functions to cart.html</p>
+            <p><strong>Expected Result:</strong> Top bar shows "Welcome, [username]!" when logged in. Logout link appears and works correctly.</p>
+        </div>
+
+        <!-- Test Credentials -->
+        <h2>🔑 Test Credentials</h2>
+        <div class="credentials">
+            <h3>User Account</h3>
+            <p><strong>Username:</strong> <code>user1</code></p>
+            <p><strong>Password:</strong> <code>password123</code></p>
+        </div>
+        <div class="credentials">
+            <h3>Admin Account</h3>
+            <p><strong>Username:</strong> <code>admin</code></p>
+            <p><strong>Password:</strong> <code>admin@123</code></p>
+        </div>
+
+        <!-- Navigation -->
+        <h2>🗺️ Quick Navigation</h2>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">🏠 Home</a>
+            <a href="products.html" class="nav-link">📦 Products</a>
+            <a href="cart.html" class="nav-link">🛒 Cart</a>
+            <a href="login.html" class="nav-link">🔐 Login</a>
+            <a href="admin-dashboard.html" class="nav-link">⚙️ Admin</a>
+            <a href="profile.html" class="nav-link">👤 Profile</a>
+        </div>
+
+        <!-- Test Plan -->
+        <h2>✅ Verification Test Plan</h2>
+
+        <h3 style="color: #667eea; margin-top: 20px;">Test 1: Product Images Display</h3>
+        <div class="test-section">
+            <div class="step">
+                <span class="step-num">1</span>
+                <strong>Navigate to Products Page</strong>
+                <div class="expected">✓ Visit <a href="products.html">products.html</a> or click "Products" in main menu</div>
+            </div>
+            <div class="step">
+                <span class="step-num">2</span>
+                <strong>Check Image Display</strong>
+                <div class="expected">✓ All 12 products should display with professional images<br>
+                ✓ Images show shoes, clothing, and accessories<br>
+                ✓ Each product has: Name, Rating (stars), Price, "Add to Cart" button</div>
+            </div>
+            <div class="step">
+                <span class="step-num">3</span>
+                <strong>Test Fallback (Optional)</strong>
+                <div class="expected">✓ Open browser DevTools (F12)<br>
+                ✓ Right-click image → Block this image domain<br>
+                ✓ Refresh page → Placeholder text appears instead<br>
+                ✓ Unblock to restore normal display</div>
+            </div>
+        </div>
+
+        <h3 style="color: #667eea; margin-top: 20px;">Test 2: Add-to-Cart Login Redirect</h3>
+        <div class="test-section">
+            <div class="step">
+                <span class="step-num">1</span>
+                <strong>Clear Login Session (Fresh Start)</strong>
+                <div class="expected">✓ Open DevTools Console (F12 → Console)<br>
+                ✓ Paste: <code>localStorage.clear()</code> then press Enter<br>
+                ✓ Refresh page to confirm logged out</div>
+            </div>
+            <div class="step">
+                <span class="step-num">2</span>
+                <strong>Go to Products Page</strong>
+                <div class="expected">✓ Verify you're logged out (top bar shows "Login / Register")<br>
+                ✓ You should see 12 products with "Add to Cart" buttons</div>
+            </div>
+            <div class="step">
+                <span class="step-num">3</span>
+                <strong>Click "Add to Cart" Button</strong>
+                <div class="expected">✓ Click any "Add to Cart" button<br>
+                ✓ <span class="success">Expected: Smooth redirect to login.html</span><br>
+                ✓ <span class="error">NOT Expected: Alert popup or console errors</span></div>
+            </div>
+            <div class="step">
+                <span class="step-num">4</span>
+                <strong>Login with Test Credentials</strong>
+                <div class="expected">✓ On login page, enter: <code>user1</code> / <code>password123</code><br>
+                ✓ Click "Login" button<br>
+                ✓ Should redirect back to products page with "Add to Cart" now functional</div>
+            </div>
+        </div>
+
+        <h3 style="color: #667eea; margin-top: 20px;">Test 3: Add Item to Cart</h3>
+        <div class="test-section">
+            <div class="step">
+                <span class="step-num">1</span>
+                <strong>Make sure you're logged in</strong>
+                <div class="expected">✓ Top bar should show "Welcome, user1!" (or your username)<br>
+                ✓ Should NOT see "Login / Register" link</div>
+            </div>
+            <div class="step">
+                <span class="step-num">2</span>
+                <strong>Add multiple products to cart</strong>
+                <div class="expected">✓ Click "Add to Cart" on 2-3 different products<br>
+                ✓ Should see notification (if implemented)<br>
+                ✓ Cart count icon (🛒) should show increasing number</div>
+            </div>
+            <div class="step">
+                <span class="step-num">3</span>
+                <strong>View Cart</strong>
+                <div class="expected">✓ Click cart icon (🛒) in top bar<br>
+                ✓ <a href="cart.html">Go to cart.html</a><br>
+                ✓ Should see all added items with prices and quantities</div>
+            </div>
+        </div>
+
+        <h3 style="color: #667eea; margin-top: 20px;">Test 4: Cart Page Features</h3>
+        <div class="test-section">
+            <div class="step">
+                <span class="step-num">1</span>
+                <strong>Check User Status Display</strong>
+                <div class="expected">✓ Top bar should show: "Welcome, [username]! | Logout"<br>
+                ✓ Green text indicating you're logged in<br>
+                ✓ <span class="success">This is the new fix!</span></div>
+            </div>
+            <div class="step">
+                <span class="step-num">2</span>
+                <strong>Test Logout</strong>
+                <div class="expected">✓ Click "Logout" link<br>
+                ✓ Should ask for confirmation: "Are you sure you want to logout?"<br>
+                ✓ Click OK → Redirects to login.html<br>
+                ✓ localStorage cleared (check DevTools)</div>
+            </div>
+            <div class="step">
+                <span class="step-num">3</span>
+                <strong>Test Cart Functionality</strong>
+                <div class="expected">✓ Modify quantities: + and - buttons work<br>
+                ✓ Remove button removes item<br>
+                ✓ Subtotal, Tax, Total recalculate correctly<br>
+                ✓ Recommendations appear (if implemented)</div>
+            </div>
+            <div class="step">
+                <span class="step-num">4</span>
+                <strong>Proceed to Checkout</strong>
+                <div class="expected">✓ Click "Proceed to Checkout"<br>
+                ✓ Should redirect to checkout.html<br>
+                ✓ Payment options should display</div>
+            </div>
+        </div>
+
+        <h3 style="color: #667eea; margin-top: 20px;">Test 5: Navigation Links</h3>
+        <div class="test-section">
+            <div class="step">
+                <span class="step-num">1</span>
+                <strong>Main Menu Navigation</strong>
+                <div class="expected">✓ <strong>Home:</strong> Returns to index.html<br>
+                ✓ <strong>Products:</strong> Goes to products.html<br>
+                ✓ <strong>Blog:</strong> Goes to blog.html<br>
+                ✓ <strong>Contact:</strong> Goes to contact.html</div>
+            </div>
+            <div class="step">
+                <span class="step-num">2</span>
+                <strong>Footer Links</strong>
+                <div class="expected">✓ All footer links (About, FAQ, Terms, etc.) point to correct pages<br>
+                ✓ No broken links (should not show 404 or error)</div>
+            </div>
+            <div class="step">
+                <span class="step-num">3</span>
+                <strong>Cart Icon Navigation</strong>
+                <div class="expected">✓ Wishlist icon (♥) → wishlist.html<br>
+                ✓ Cart icon (🛒) → cart.html<br>
+                ✓ Both show item counts (if any items exist)</div>
+            </div>
+        </div>
+
+        <!-- Checklist for Quick Verification -->
+        <h2>📝 Quick Verification Checklist</h2>
+        <div class="checklist">
+            <div class="checklist-item">
+                <input type="checkbox" id="check1">
+                <label for="check1">Product images display on products.html</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check2">
+                <label for="check2">All 12 products have visible images (not broken)</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check3">
+                <label for="check3">Add-to-cart while logged out redirects to login.html</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check4">
+                <label for="check4">Login works with user1/password123</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check5">
+                <label for="check5">Add-to-cart works when logged in</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check6">
+                <label for="check6">Cart page shows "Welcome, [username]!" message</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check7">
+                <label for="check7">Logout button works and clears session</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check8">
+                <label for="check8">Cart quantities can be modified</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check9">
+                <label for="check9">Cart total calculates correctly</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check10">
+                <label for="check10">Checkout page displays payment options</label>
+            </div>
+        </div>
+
+        <!-- Troubleshooting -->
+        <h2>🔍 Troubleshooting</h2>
+        
+        <div class="test-section" style="border-left-color: #e74c3c;">
+            <h3 style="color: #e74c3c; margin-top: 0;">Issue: Images Still Not Showing</h3>
+            <p><strong>Solution:</strong></p>
+            <ul style="margin-left: 20px;">
+                <li>Check browser console (F12) for image load errors</li>
+                <li>Verify Unsplash URLs are accessible (try opening URL directly)</li>
+                <li>Clear browser cache: Ctrl+Shift+Delete</li>
+                <li>Hard refresh page: Ctrl+F5</li>
+                <li>Check if placeholder fallback appears instead</li>
+            </ul>
+        </div>
+
+        <div class="test-section" style="border-left-color: #e74c3c;">
+            <h3 style="color: #e74c3c; margin-top: 0;">Issue: Add-to-Cart Doesn't Redirect to Login</h3>
+            <p><strong>Solution:</strong></p>
+            <ul style="margin-left: 20px;">
+                <li>Check DevTools Console for JavaScript errors</li>
+                <li>Verify localStorage is cleared: <code>localStorage.clear()</code> in console</li>
+                <li>Check if UserSession.isLoggedIn() returns false when logged out</li>
+                <li>Verify shopping-flow.js is loaded: Search for "shopping-flow.js" in Sources tab</li>
+            </ul>
+        </div>
+
+        <div class="test-section" style="border-left-color: #e74c3c;">
+            <h3 style="color: #e74c3c; margin-top: 0;">Issue: Cart Page Shows "Login/Register" Instead of User Name</h3>
+            <p><strong>Solution:</strong></p>
+            <ul style="margin-left: 20px;">
+                <li>Verify you're actually logged in (check localStorage: <code>localStorage.getItem('username')</code>)</li>
+                <li>Check that updateUserStatus() function is being called in cart.html</li>
+                <li>Refresh page to trigger initialization</li>
+                <li>Check browser console for errors in updateUserStatus() function</li>
+            </ul>
+        </div>
+
+        <!-- Summary -->
+        <h2>📊 What Was Fixed & Why</h2>
+        <p style="margin-bottom: 15px;">These three fixes ensure the core e-commerce flow works smoothly:</p>
+        <ul style="margin-left: 20px; line-height: 1.8;">
+            <li><strong>Product Images:</strong> Users can see what they're buying. Unsplash URLs ensure professional product photos. Fallback prevents blank spaces.</li>
+            <li><strong>Login Redirect:</strong> Seamless UX when adding to cart while logged out. Direct redirect instead of alert prevents friction.</li>
+            <li><strong>Cart Auth Display:</strong> Shows user they're logged in, builds trust. Logout button allows session control.</li>
+        </ul>
+
+        <p style="margin-top: 30px; padding: 15px; background: #f0f0f0; border-radius: 6px; text-align: center; color: #666;">
+            <strong>All fixes preserve existing functionality</strong> - Login system, Product cart, Recommendations all remain intact and enhanced.
+        </p>
+    </div>
+
+    <script>
+        // Make checkboxes persist
+        const checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                localStorage.setItem(checkbox.id, checkbox.checked);
+            });
+            checkbox.checked = localStorage.getItem(checkbox.id) === 'true';
+        });
+    </script>
+</body>
+</html>
