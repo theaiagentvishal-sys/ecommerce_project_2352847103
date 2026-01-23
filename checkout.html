@@ -450,7 +450,30 @@
             alert('Order placed successfully! Order ID: ' + order.id);
             window.location.href = 'order-confirmation.html?id=' + order.id;
         }
+
+        // Update user status display
+        function updateUserStatus() {
+            const userType = localStorage.getItem('userType');
+            const username = localStorage.getItem('username');
+            
+            if (userType && username) {
+                document.getElementById('userStatusDisplay').style.display = 'block';
+                document.getElementById('guestDisplay').style.display = 'none';
+                document.getElementById('userNameDisplay').textContent = username;
+            }
+        }
+
+        function handleLogout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('userType');
+                localStorage.removeItem('username');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('loginTime');
+                window.location.href = 'login.html';
+            }
+        }
         
+        updateUserStatus();
         loadCheckoutSummary();
     </script>
 </body>
