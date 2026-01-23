@@ -2,11 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="manifest" href="public/manifest.json">
     <title>Login - E-SHOP</title>
     <link rel="icon" type="image/png" href="public/images/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="public/font-awesome.css">
+    <!-- Auth System -->
+    <script src="public/auth.js" defer></script>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:Poppins,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
@@ -118,6 +121,17 @@
     </div>
 
     <script>
+        // Wait for auth.js to load
+        let authReady = false;
+        document.addEventListener('DOMContentLoaded', () => {
+            authReady = true;
+            // Check if already logged in
+            if (UserSession && UserSession.isLoggedIn()) {
+                const userType = UserSession.getCurrentUser().userType;
+                window.location.href = userType === 'admin' ? 'admin-dashboard.html' : 'index.html';
+            }
+        });
+
         let currentType = 'user';
 
         function switchType(type) {
@@ -145,15 +159,15 @@
             }
             
             if ((username === 'user1' || username === 'user2') && password === 'password123') {
-                localStorage.setItem('userType', 'user');
-                localStorage.setItem('username', username);
-                localStorage.setItem('userId', username === 'user1' ? 'U001' : 'U002');
-                localStorage.setItem('loginTime', new Date().toISOString());
+                const userId = username === 'user1' ? 'U001' : 'U002';
+                UserSession.saveSession(username, userId, 'user');
                 
-                document.getElementById('userSuccessMsg').textContent = '✓ Login successful! Redirecting...';
+                document.getElementById('userSuccessMsg').textContent = `✓ Welcome back, ${username}!`;
                 document.getElementById('userSuccessMsg').style.display = 'block';
                 
-                setTimeout(() => window.location.href = 'index.html', 1000);
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
             } else {
                 document.getElementById('userGeneralError').textContent = 'Invalid credentials';
                 document.getElementById('userGeneralError').style.display = 'block';
@@ -177,32 +191,24 @@
             }
             
             if (username === 'admin' && password === 'admin@123') {
-                localStorage.setItem('userType', 'admin');
-                localStorage.setItem('username', 'admin');
-                localStorage.setItem('loginTime', new Date().toISOString());
+                UserSession.saveSession(username, 'ADMIN001', 'admin');
                 
-                document.getElementById('adminSuccessMsg').textContent = '✓ Login successful! Redirecting...';
+                document.getElementById('adminSuccessMsg').textContent = '✓ Admin login successful!';
                 document.getElementById('adminSuccessMsg').style.display = 'block';
                 
-                setTimeout(() => window.location.href = 'admin-dashboard.html', 1000);
+                setTimeout(() => {
+                    window.location.href = 'admin-dashboard.html';
+                }, 1000);
             } else {
                 document.getElementById('adminGeneralError').textContent = 'Invalid admin credentials';
                 document.getElementById('adminGeneralError').style.display = 'block';
             }
         }
 
-        function quickUserLogin(user) {
-            localStorage.setItem('userType', 'user');
-            localStorage.setItem('username', user);
-            localStorage.setItem('userId', user === 'user1' ? 'U001' : 'U002');
-            localStorage.setItem('loginTime', new Date().toISOString());
+        function quickUserLogin(username) {
+            const userId = username === 'user1' ? 'U001' : 'U002';
+            UserSession.saveSession(username, userId, 'user');
             window.location.href = 'index.html';
-        }
-
-        // Check if already logged in
-        if (localStorage.getItem('userType')) {
-            const userType = localStorage.getItem('userType');
-            window.location.href = userType === 'admin' ? 'admin-dashboard.html' : 'index.html';
         }
     </script>
 </body>
