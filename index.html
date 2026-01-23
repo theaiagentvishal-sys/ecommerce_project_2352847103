@@ -38,8 +38,11 @@
 <link rel="stylesheet" href="public/fe/reset.css">
 <link rel="stylesheet" href="public/fe/style.css">
 <link rel="stylesheet" href="public/fe/responsive.css">
+<!-- Shopping Experience Enhancement -->
+<link rel="stylesheet" href="public/shopping-experience.css">
 <!-- Auth System -->
 <script src="public/auth.js" defer></script>
+<script src="public/shopping-experience.js" defer></script>
 <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5f2e5abf393162001291e431&product=inline-share-buttons' async='async'></script>
 <style>
     /* Multilevel dropdown */
@@ -245,50 +248,114 @@
 
 <!--/ End Slider Area -->
 
-<!-- Start Small Banner  -->
+<!-- Personalized Greeting Section -->
+<div class="container" style="margin-top: 30px; margin-bottom: 30px;">
+    <div id="personalizedGreeting"></div>
+</div>
+
+<!-- Featured Deals Section -->
+<section class="featured-deals-section" style="background: #f9f9f9; padding: 30px 0; margin-bottom: 30px;">
+    <div class="container">
+        <div class="section-header">
+            <h3>🔥 Limited Time Deals</h3>
+            <p>Don't miss our special offers - available for limited time only!</p>
+        </div>
+        <div id="featuredDealsContainer"></div>
+    </div>
+</section>
+
+<!-- Category Navigation Banners -->
 <section class="small-banner section">
     <div class="container-fluid">
         <div class="row">
-                                                                                    <!-- Single Banner  -->
-                        <div class="col-lg-4 col-md-6 col-12">
-                            <div class="single-banner">
-                                                                    <img src="public/banner.png" alt="Footwear">
-                                                                <div class="content">
-                                    <h3>Footwear</h3>
-                                        <a href="index.html">Discover Now</a>
-                                </div>
-                            </div>
-                        </div>
-                                        <!-- /End Single Banner  -->
-                                                            <!-- Single Banner  -->
-                        <div class="col-lg-4 col-md-6 col-12">
-                            <div class="single-banner">
-                                                                    <img src="public/background.jpg" alt="Garments">
-                                                                <div class="content">
-                                    <h3>Garments</h3>
-                                        <a href="index.html">Discover Now</a>
-                                </div>
-                            </div>
-                        </div>
-                                        <!-- /End Single Banner  -->
-                                    </div>
+            <!-- Footwear Banner -->
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="single-banner">
+                    <img src="public/banner.png" alt="Footwear">
+                    <div class="content">
+                        <h3>👟 Footwear</h3>
+                        <a href="products.html?category=footwear">Shop Now →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Garments Banner -->
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="single-banner">
+                    <img src="public/background.jpg" alt="Garments">
+                    <div class="content">
+                        <h3>👕 Garments</h3>
+                        <a href="products.html?category=garments">Shop Now →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accessories Banner -->
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="single-banner">
+                    <img src="public/background.jpg" alt="Accessories">
+                    <div class="content">
+                        <h3>✨ Accessories</h3>
+                        <a href="products.html?category=accessories">Shop Now →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 <!-- End Small Banner -->
 
 <!-- Start Product Area -->
 <div class="product-area section">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-title">
-                        <h2>Trending Item</h2>
-                    </div>
+    <div class="container">
+        <!-- Featured Products Section -->
+        <div class="row">
+            <div class="col-12">
+                <div class="section-header">
+                    <h3>⭐ Featured Products - Best Sellers</h3>
+                    <p>Explore our most popular and highly-rated items</p>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="product-info">
+        </div>
+        <div class="row">
+            <div class="col-12" id="featuredProductsContainer"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Recently Viewed Section -->
+<div class="product-area section" id="recentlyViewedSection" style="display:none;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-header">
+                    <h3>👀 Recently Viewed</h3>
+                    <p>Continue shopping where you left off</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12" id="recentlyViewedContainer"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Recommendations Section -->
+<div class="product-area section" style="background: #f9f9f9; padding: 30px 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-header">
+                    <h3>💡 Recommended For You</h3>
+                    <p>Based on your shopping interests</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12" id="recommendationsContainer"></div>
+        </div>
+    </div>
+</div>
                         <div class="nav-main">
                             <!-- Tab Nav -->
                             <ul class="nav nav-tabs filter-tope-group" id="myTab" role="tablist">
