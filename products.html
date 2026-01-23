@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="public/font-awesome.css">
     <link rel="stylesheet" href="public/fe/themify-icons.css">
     <link rel="stylesheet" href="public/fe/style.css">
+    <!-- Auth System -->
+    <script src="public/auth.js" defer></script>
     <style>
         .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;padding:30px 0}.product-card{background:#fff;border-radius:6px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.08);transition:transform .2s}.product-card:hover{transform:translateY(-3px)}.product-image{width:100%;height:180px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}.product-image img{width:100%;height:100%;object-fit:cover}.wishlist-badge{position:absolute;top:8px;right:8px;background:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.1)}.product-info{padding:12px}.product-name{font-weight:600;margin:0 0 3px;font-size:14px;line-height:1.3}.product-rating{color:#FFC107;font-size:11px;margin:0 0 4px}.product-price{color:#F7941D;font-weight:700;font-size:16px;margin:0 0 8px}.btn-add-cart{background:#F7941D;color:#fff;padding:8px;width:100%;border:0;border-radius:3px;cursor:pointer;font-weight:600;font-size:13px}.filter-sidebar{background:#fff;padding:15px;border-radius:6px;margin-bottom:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)}.filter-group{margin-bottom:15px}.filter-group h4{margin:0 0 8px;font-weight:600;font-size:13px}.filter-option{margin-bottom:6px;font-size:13px}@media(max-width:768px){.products-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}.topbar,.middle-inner{padding:8px 0}}.container{padding:0 8px}@media(max-width:480px){.products-grid{grid-template-columns:repeat(2,1fr)}.col-lg-3{display:none}}
     </style>
@@ -20,7 +22,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6"><div class="left-content"><ul class="list-main"><li><i class="ti-location-pin"></i> <span>London Oxford Street, UK</span></li></ul></div></div>
-                    <div class="col-lg-6"><div class="right-content"><ul class="list-main"><li><a href="track-order.html">Track Order</a></li><li><a href="login.html">Login</a> / <a href="register.html">Register</a></li></ul></div></div>
+                    <div class="col-lg-6"><div class="right-content"><ul class="list-main"><li id="userStatusDisplay" style="display:none"><i class="ti-user"></i> <a href="profile.html"><span style="color:#27ae60;font-weight:600" id="userNameDisplay">User</span></a> | <a href="javascript:void(0)" onclick="handleLogout()" style="color:#e74c3c">Logout</a></li><li id="guestDisplay"><a href="track-order.html">Track Order</a></li><li id="guestDisplay2"><a href="login.html">Login</a> / <a href="register.html">Register</a></li></ul></div></div>
                 </div>
             </div>
         </div>
@@ -81,12 +83,73 @@
     </footer>
 
     <script>
-const p=[{name:'Premium Running Shoes',price:89.99,rating:5,cat:'footwear',img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=300&fit=crop'},{name:'Casual Comfort Shoes',price:79.99,rating:4,cat:'footwear',img:'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=300&h=300&fit=crop'},{name:'Classic Cotton T-Shirt',price:29.99,rating:5,cat:'garments',img:'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=300&fit=crop'},{name:'Premium Denim Jeans',price:59.99,rating:4,cat:'garments',img:'https://images.unsplash.com/photo-1542272604-787c62d465d1?w=300&h=300&fit=crop'},{name:'Sport Athletic Shoes',price:99.99,rating:5,cat:'footwear',img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=300&fit=crop'},{name:'Stylish Winter Jacket',price:149.99,rating:4,cat:'garments',img:'https://images.unsplash.com/photo-1551028719-00167b16ebc5?w=300&h=300&fit=crop'},{name:'Leather Belt',price:39.99,rating:4,cat:'accessories',img:'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&h=300&fit=crop'},{name:'Sports Socks Pack',price:19.99,rating:5,cat:'accessories',img:'https://images.unsplash.com/photo-1586620902629-8919faf4c088?w=300&h=300&fit=crop'},{name:'Summer Dress',price:69.99,rating:5,cat:'garments',img:'https://images.unsplash.com/photo-1595777707802-21b287cecdc3?w=300&h=300&fit=crop'},{name:'Hiking Boots',price:129.99,rating:4,cat:'footwear',img:'https://images.unsplash.com/photo-1518575658510-7f3f6dc0f0c9?w=300&h=300&fit=crop'},{name:'Casual Polo Shirt',price:45.99,rating:4,cat:'garments',img:'https://images.unsplash.com/photo-1597070194924-b86c6e81fa11?w=300&h=300&fit=crop'},{name:'Sports Cap',price:24.99,rating:5,cat:'accessories',img:'https://images.unsplash.com/photo-1551028719-00167b16ebc5?w=300&h=300&fit=crop'}];
-function r(){let h='';p.forEach(x=>{const s='★'.repeat(x.rating)+'☆'.repeat(5-x.rating);h+=`<div class="product-card"><div class="product-image"><img src="${x.img}" alt="${x.name}" loading="lazy"><div class="wishlist-badge" onclick="w('${x.name}',${x.price})"><i class="fa fa-heart-o"></i></div></div><div class="product-info"><div class="product-name">${x.name}</div><div class="product-rating">${s}</div><div class="product-price">$${x.price}</div><button class="btn-add-cart" onclick="a('${x.name}',${x.price})">Add to Cart</button></div></div>`});document.getElementById('productsGrid').innerHTML=h;u()}
-function a(n,pr){let c=JSON.parse(localStorage.getItem('cart'))||[];const e=c.find(i=>i.name===n);if(e){e.quantity+=1}else{c.push({name:n,price:pr,quantity:1,category:n.includes('Shoe')||n.includes('Boot')?'footwear':n.includes('T-')||n.includes('Shirt')||n.includes('Dress')||n.includes('Jacket')?'garments':'accessories'})}localStorage.setItem('cart',JSON.stringify(c));alert('✓ Added to cart!');u()}
-function w(n,pr){let wl=JSON.parse(localStorage.getItem('wishlist'))||[];if(!wl.find(i=>i.name===n)){wl.push({name:n,price:pr});localStorage.setItem('wishlist',JSON.stringify(wl));alert('♥ Added to wishlist!')}else{alert('Already in wishlist!')}u()}
-function u(){const c=JSON.parse(localStorage.getItem('cart'))||[];const wl=JSON.parse(localStorage.getItem('wishlist'))||[];document.getElementById('cartCount').textContent=c.reduce((s,i)=>s+i.quantity,0);document.getElementById('wishlistCount').textContent=wl.length}
-r();
+const products=[{name:'Premium Running Shoes',price:89.99,rating:5,cat:'footwear',img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=300&fit=crop'},{name:'Casual Comfort Shoes',price:79.99,rating:4,cat:'footwear',img:'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=300&h=300&fit=crop'},{name:'Classic Cotton T-Shirt',price:29.99,rating:5,cat:'garments',img:'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=300&fit=crop'},{name:'Premium Denim Jeans',price:59.99,rating:4,cat:'garments',img:'https://images.unsplash.com/photo-1542272604-787c62d465d1?w=300&h=300&fit=crop'},{name:'Sport Athletic Shoes',price:99.99,rating:5,cat:'footwear',img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=300&fit=crop'},{name:'Stylish Winter Jacket',price:149.99,rating:4,cat:'garments',img:'https://images.unsplash.com/photo-1551028719-00167b16ebc5?w=300&h=300&fit=crop'},{name:'Leather Belt',price:39.99,rating:4,cat:'accessories',img:'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&h=300&fit=crop'},{name:'Sports Socks Pack',price:19.99,rating:5,cat:'accessories',img:'https://images.unsplash.com/photo-1586620902629-8919faf4c088?w=300&h=300&fit=crop'},{name:'Summer Dress',price:69.99,rating:5,cat:'garments',img:'https://images.unsplash.com/photo-1595777707802-21b287cecdc3?w=300&h=300&fit=crop'},{name:'Hiking Boots',price:129.99,rating:4,cat:'footwear',img:'https://images.unsplash.com/photo-1518575658510-7f3f6dc0f0c9?w=300&h=300&fit=crop'},{name:'Casual Polo Shirt',price:45.99,rating:4,cat:'garments',img:'https://images.unsplash.com/photo-1597070194924-b86c6e81fa11?w=300&h=300&fit=crop'},{name:'Sports Cap',price:24.99,rating:5,cat:'accessories',img:'https://images.unsplash.com/photo-1551028719-00167b16ebc5?w=300&h=300&fit=crop'}];
+
+function renderProducts(){
+    let html='';
+    products.forEach(product=>{
+        const stars='★'.repeat(product.rating)+'☆'.repeat(5-product.rating);
+        html+=`<div class="product-card">
+            <div class="product-image">
+                <img src="${product.img}" alt="${product.name}" loading="lazy">
+                <div class="wishlist-badge" onclick="addToWishlist('${product.name}',${product.price})">
+                    <i class="fa fa-heart-o"></i>
+                </div>
+            </div>
+            <div class="product-info">
+                <div class="product-name">${product.name}</div>
+                <div class="product-rating">${stars}</div>
+                <div class="product-price">$${product.price}</div>
+                <button class="btn-add-cart" onclick="addProductToCart('${product.name}',${product.price},'${product.cat}')">Add to Cart</button>
+            </div>
+        </div>`;
+    });
+    document.getElementById('productsGrid').innerHTML=html;
+    updateCartDisplay();
+}
+
+function addProductToCart(name, price, category) {
+    // Check if user is logged in
+    if (!UserSession.isLoggedIn()) {
+        alert('⚠️ Please login first to add items to cart!');
+        window.location.href = 'login.html';
+        return;
+    }
+    
+    CartManager.addToCart({
+        name: name,
+        price: price,
+        quantity: 1,
+        category: category
+    });
+    alert('✓ Added to cart!');
+    CartManager.updateCartDisplay();
+}
+
+function addToWishlist(name, price) {
+    // Check if user is logged in
+    if (!UserSession.isLoggedIn()) {
+        alert('⚠️ Please login first to add to wishlist!');
+        window.location.href = 'login.html';
+        return;
+    }
+    
+    CartManager.addToWishlist({
+        name: name,
+        price: price
+    });
+    alert('♥ Added to wishlist!');
+    CartManager.updateCartDisplay();
+}
+
+function updateCartDisplay() {
+    CartManager.updateCartDisplay();
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+    renderProducts();
+});
     </script>
 </body>
 </html>
