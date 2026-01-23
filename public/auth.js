@@ -3,8 +3,13 @@
  * Maintains user sessions and user-specific carts
  */
 
+// Ensure UserSession is globally available
+if (typeof window.UserSession === 'undefined') {
+    window.UserSession = {};
+}
+
 // User Session Management
-const UserSession = {
+const UserSession = window.UserSession = {
     // Initialize session on page load
     init() {
         this.restoreSession();
@@ -324,5 +329,19 @@ function handleAdminLogin(e) {
     } else {
         document.getElementById('adminGeneralError').textContent = 'Invalid admin credentials';
         document.getElementById('adminGeneralError').style.display = 'block';
+    }
+}
+
+// Initialize on DOM ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof UserSession !== 'undefined' && UserSession.init) {
+            UserSession.init();
+        }
+    });
+} else {
+    // DOM already loaded
+    if (typeof UserSession !== 'undefined' && UserSession.init) {
+        UserSession.init();
     }
 }
