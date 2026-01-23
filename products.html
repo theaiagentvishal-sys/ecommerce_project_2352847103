@@ -90,25 +90,20 @@ function renderProducts(){
     let html='';
     ShoppingExperience.products.forEach(product=>{
         const stars='★'.repeat(product.rating)+'☆'.repeat(5-product.rating);
-        html+=`<div class="product-quick-buy-card" onclick="trackProductView('${product.name.replace(/'/g, "\\'")}')">
-            <div class="product-img-wrapper">
-                <img src="${product.img}" alt="${product.name}" loading="lazy">
-                <div class="quick-buy-overlay">
-                    <button class="btn-quick-add" onclick="event.stopPropagation(); ShoppingFlow.quickAddToCart('${product.name.replace(/'/g, "\\'")}', ${product.price}, '${product.cat}', '${product.img}')">
-                        🛒 ADD TO CART
-                    </button>
-                    <button class="btn-quick-view" onclick="event.stopPropagation(); viewProduct('${product.name.replace(/'/g, "\\'")}')" style="margin-top: 8px;">
-                        👁️ QUICK VIEW
-                    </button>
+        html+=`<div class="product-card" onclick="trackProductView('${product.name.replace(/'/g, "\\'")}')">
+            <div class="product-image">
+                <img src="${product.img || 'https://via.placeholder.com/180?text=' + encodeURIComponent(product.name)}" alt="${product.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/180?text=' + encodeURIComponent('${product.name}')">
+                <div class="wishlist-badge" onclick="event.stopPropagation(); addToWishlist('${product.name.replace(/'/g, "\\'")}', ${product.price})">
+                    <i class="fa fa-heart-o"></i>
                 </div>
             </div>
-            <div class="product-info-quick">
-                <h4>${product.name}</h4>
-                <p class="product-desc">${product.description || ''}</p>
-                <div class="product-footer">
-                    <span class="price">$${product.price}</span>
-                    <span class="rating">★${product.rating}</span>
-                </div>
+            <div class="product-info">
+                <h4 class="product-name">${product.name}</h4>
+                <div class="product-rating">${stars}</div>
+                <div class="product-price">$${product.price}</div>
+                <button class="btn-add-cart" onclick="event.stopPropagation(); ShoppingFlow.quickAddToCart('${product.name.replace(/'/g, "\\'")}', ${product.price}, '${product.cat}', '${product.img}')">
+                    🛒 Add to Cart
+                </button>
             </div>
         </div>`;
     });
