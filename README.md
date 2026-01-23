@@ -62,7 +62,7 @@ php artisan serve
 ```
 🔗 Open `http://localhost:80`
 or       http://127.0.0.1:8000/
-
+or site is live at https://theaiagentvishal-sys.github.io/ecommerce_project_2352847103/
 ### **Admin Login Credentials:**
 📧 **Email:** `admin@gmail.com`  
 🔑 **Password:** `1111`
@@ -73,4 +73,5 @@ or       http://127.0.0.1:8000/
 🔹 This project is **MIT Licensed** – Feel free to use & modify!
 
 ⭐ **If you find this project helpful, don't forget to star it!** ⭐
+
 
