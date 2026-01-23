@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login - E-SHOP</title>
+    <link rel="icon" type="image/png" href="public/images/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="public/font-awesome.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:Poppins,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+        .login-container{background:#fff;padding:40px;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,0.2);width:100%;max-width:400px}
+        .login-header{text-align:center;margin-bottom:30px}
+        .login-header h1{color:#333;font-size:24px;margin-bottom:5px}
+        .login-header p{color:#666;font-size:13px}
+        .form-group{margin-bottom:20px}
+        .form-group label{display:block;color:#333;font-weight:600;margin-bottom:8px;font-size:13px}
+        .form-group input{width:100%;padding:12px;border:1px solid #ddd;border-radius:4px;font-size:13px;font-family:Poppins,sans-serif}
+        .form-group input:focus{outline:0;border-color:#667eea;box-shadow:0 0 0 3px rgba(102,126,234,.1)}
+        .login-btn{width:100%;padding:12px;background:#667eea;color:#fff;border:0;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;margin-top:10px;transition:background .3s}
+        .login-btn:hover{background:#764ba2}
+        .quick-login{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}
+        .quick-btn{padding:10px;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;cursor:pointer;font-size:12px;font-weight:600;color:#333;transition:all .3s}
+        .quick-btn:hover{background:#667eea;color:#fff;border-color:#667eea}
+        .login-footer{text-align:center;margin-top:20px;font-size:12px;color:#666}
+        .login-footer a{color:#667eea;text-decoration:none}
+        .demo-creds{background:#f5f5f5;padding:15px;border-radius:4px;margin-top:20px;font-size:12px;border-left:3px solid #667eea}
+        .demo-creds p{margin:5px 0}
+        .error{color:#e74c3c;font-size:12px;margin-top:5px;display:none}
+        .success{color:#27ae60;font-size:12px;margin-top:5px;display:none}
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>E-SHOP Login</h1>
+            <p>Welcome back to your account</p>
+        </div>
+        
+        <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label>Email or Username</label>
+                <input type="text" id="username" placeholder="user1 or user2" required>
+                <div class="error" id="usernameError"></div>
+            </div>
+            
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="password123" required>
+                <div class="error" id="passwordError"></div>
+            </div>
+            
+            <button type="submit" class="login-btn">Login to Your Account</button>
+            <div class="error" id="generalError"></div>
+            <div class="success" id="successMsg"></div>
+        </form>
+        
+        <div class="quick-login">
+            <button type="button" class="quick-btn" onclick="quickLogin('user1')">Quick: User 1</button>
+            <button type="button" class="quick-btn" onclick="quickLogin('user2')">Quick: User 2</button>
+        </div>
+        
+        <div class="demo-creds">
+            <p><strong>Demo User Credentials:</strong></p>
+            <p><strong>User 1:</strong> user1 / password123</p>
+            <p><strong>User 2:</strong> user2 / password123</p>
+        </div>
+        
+        <div class="login-footer">
+            <p>Don't have an account? <a href="register.html">Sign up here</a></p>
+            <p style="margin-top:10px">Are you admin? <a href="admin-login.html">Admin Login</a></p>
+        </div>
+    </div>
+
+    <script>
+        function handleLogin(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            
+            // Clear errors
+            document.getElementById('generalError').style.display = 'none';
+            document.getElementById('usernameError').style.display = 'none';
+            document.getElementById('passwordError').style.display = 'none';
+            document.getElementById('successMsg').style.display = 'none';
+            
+            if (!username) {
+                document.getElementById('usernameError').textContent = 'Username required';
+                document.getElementById('usernameError').style.display = 'block';
+                return;
+            }
+            
+            if (!password) {
+                document.getElementById('passwordError').textContent = 'Password required';
+                document.getElementById('passwordError').style.display = 'block';
+                return;
+            }
+            
+            // Check credentials
+            if ((username === 'user1' || username === 'user2') && password === 'password123') {
+                localStorage.setItem('userType', 'user');
+                localStorage.setItem('username', username);
+                localStorage.setItem('userId', username === 'user1' ? 'U001' : 'U002');
+                localStorage.setItem('loginTime', new Date().toISOString());
+                
+                document.getElementById('successMsg').textContent = '✓ Login successful! Redirecting...';
+                document.getElementById('successMsg').style.display = 'block';
+                
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            } else {
+                document.getElementById('generalError').textContent = 'Invalid credentials';
+                document.getElementById('generalError').style.display = 'block';
+            }
+        }
+        
+        function quickLogin(user) {
+            localStorage.setItem('userType', 'user');
+            localStorage.setItem('username', user);
+            localStorage.setItem('userId', user === 'user1' ? 'U001' : 'U002');
+            localStorage.setItem('loginTime', new Date().toISOString());
+            window.location.href = 'index.html';
+        }
+        
+        // Check if already logged in
+        if (localStorage.getItem('userType') === 'user') {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

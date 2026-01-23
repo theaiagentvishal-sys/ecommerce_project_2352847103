@@ -140,15 +140,14 @@
     <div class="topbar">
         <div class="container">
             <div class="row">
-
-                </div>
+                <div class="col-lg-6 col-md-12 col-12"></div>
                 <div class="col-lg-6 col-md-12 col-12">
                     <!-- Top Right -->
                     <div class="right-content">
                         <ul class="list-main">
                         <li><i class="ti-location-pin"></i> <a href="track-order.html">Track Order</a></li>
-                            
-                                                            <li><i class="ti-power-off"></i><a href="profile.html">My Account /</a> <a href="login.html">Login /</a> <a href="register.html">Register</a></li>
+                            <li id="userStatusDisplay" style="display:none"><i class="ti-user"></i> <a href="profile.html"><span style="color:#27ae60;font-weight:600" id="userNameDisplay">User</span></a> | <a href="javascript:void(0)" onclick="handleLogout()" style="color:#e74c3c">Logout</a> | <li id="adminLink" style="display:none"><a href="admin-dashboard.html" style="color:#667eea;font-weight:600">📊 Admin</a> |</li></li>
+                            <li id="guestDisplay"><i class="ti-power-off"></i><a href="profile.html">My Account /</a> <a href="login.html">Login /</a> <a href="register.html">Register</a></li>
                                                     </ul>
                     </div>
                     <!-- End Top Right -->
@@ -695,6 +694,44 @@
 
 			});
 		});
+	  </script>
+	  
+	  <script>
+	  	// Check if user is logged in and update header
+	  	function updateUserStatus() {
+	  		const userType = localStorage.getItem('userType');
+	  		const username = localStorage.getItem('username');
+	  		
+	  		if (userType && username) {
+	  			// Show logged in state
+	  			document.getElementById('userStatusDisplay').style.display = 'block';
+	  			document.getElementById('guestDisplay').style.display = 'none';
+	  			document.getElementById('userNameDisplay').textContent = username;
+	  			
+	  			// Show admin link if user is admin
+	  			if (userType === 'admin') {
+	  				document.getElementById('adminLink').style.display = 'inline';
+	  			}
+	  		} else {
+	  			// Show guest state
+	  			document.getElementById('userStatusDisplay').style.display = 'none';
+	  			document.getElementById('guestDisplay').style.display = 'block';
+	  			document.getElementById('adminLink').style.display = 'none';
+	  		}
+	  	}
+
+	  	function handleLogout() {
+	  		if (confirm('Are you sure you want to logout?')) {
+	  			localStorage.removeItem('userType');
+	  			localStorage.removeItem('username');
+	  			localStorage.removeItem('userId');
+	  			localStorage.removeItem('loginTime');
+	  			window.location.href = 'index.html';
+	  		}
+	  	}
+
+	  	// Run on page load
+	  	updateUserStatus();
 	  </script>
 </body>
 </html>
