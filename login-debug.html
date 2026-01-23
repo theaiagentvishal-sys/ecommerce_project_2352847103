@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="manifest" href="public/manifest.json">
+    <title>Login - E-SHOP (DEBUG)</title>
+    <link rel="icon" type="image/png" href="public/images/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="public/font-awesome.css">
+    <!-- Auth System -->
+    <script src="public/auth.js" defer></script>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:Poppins,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+        .login-wrapper{background:#fff;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.3);overflow:hidden;max-width:900px;width:100%;display:grid;grid-template-columns:1fr 1fr}
+        .login-section{padding:40px}
+        .login-left{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;display:flex;flex-direction:column;justify-content:center}
+        .login-left h1{font-size:32px;margin-bottom:20px}
+        .login-left p{font-size:14px;line-height:1.6;opacity:0.9}
+        .login-right{background:#fff}
+        .login-header{text-align:center;margin-bottom:30px}
+        .login-header h2{color:#333;font-size:22px}
+        .login-type-selector{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:30px;padding-bottom:20px;border-bottom:1px solid #eee}
+        .type-btn{padding:12px;border:2px solid #ddd;background:#fff;color:#333;border-radius:6px;cursor:pointer;font-weight:600;font-size:13px;transition:all .3s}
+        .type-btn.active{border-color:#667eea;background:#667eea;color:#fff}
+        .type-btn:hover{border-color:#667eea}
+        .form-group{margin-bottom:20px}
+        .form-group label{display:block;color:#333;font-weight:600;margin-bottom:8px;font-size:13px}
+        .form-group input{width:100%;padding:12px;border:1px solid #ddd;border-radius:6px;font-size:13px;font-family:Poppins,sans-serif;transition:all .3s}
+        .form-group input:focus{outline:0;border-color:#667eea;box-shadow:0 0 0 3px rgba(102,126,234,.1)}
+        .login-btn{width:100%;padding:12px;background:#667eea;color:#fff;border:0;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;transition:background .3s}
+        .login-btn:hover{background:#764ba2}
+        .quick-login{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}
+        .quick-btn{padding:10px;background:#f5f5f5;border:1px solid #ddd;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;color:#333;transition:all .3s}
+        .quick-btn:hover{background:#667eea;color:#fff}
+        .demo-creds{background:#f5f5f5;padding:15px;border-radius:6px;margin-top:20px;font-size:12px;border-left:3px solid #667eea}
+        .demo-creds p{margin:5px 0}
+        .error{color:#e74c3c;font-size:12px;margin-top:5px;display:none}
+        .success{color:#27ae60;font-size:12px;margin-top:5px;display:none}
+        .debug-panel {
+            background: #f0f0f0;
+            border: 2px solid #999;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 11px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .debug-panel h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-family: Poppins, sans-serif;
+        }
+        .debug-log {
+            color: #555;
+            margin: 3px 0;
+        }
+        .debug-log.success {
+            color: #27ae60;
+        }
+        .debug-log.error {
+            color: #e74c3c;
+        }
+        @media(max-width:768px){.login-wrapper{grid-template-columns:1fr}.login-left{padding:30px;text-align:center}.login-left h1{font-size:24px}.login-section{padding:30px}}
+    </style>
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="login-section login-left">
+            <div>
+                <h1>Welcome to E-SHOP</h1>
+                <p>Your premier online shopping destination for quality footwear, garments, and accessories. Join thousands of satisfied customers today!</p>
+                <p style="margin-top:30px;font-size:12px">✓ Fast Checkout<br>✓ Secure Payment<br>✓ Free Returns<br>✓ 24/7 Support</p>
+            </div>
+        </div>
+
+        <div class="login-section login-right">
+            <div class="login-header">
+                <h2>Login (DEBUG)</h2>
+            </div>
+            
+            <div class="login-type-selector">
+                <button class="type-btn active" onclick="switchType('user')" id="userTypeBtn">👤 User Login</button>
+                <button class="type-btn" onclick="switchType('admin')" id="adminTypeBtn">🔐 Admin Login</button>
+            </div>
+
+            <!-- User Login Form -->
+            <div id="userLoginForm">
+                <form onsubmit="handleUserLogin(event)">
+                    <div class="form-group">
+                        <label>Email or Username</label>
+                        <input type="text" id="userUsername" placeholder="user1 or user2" required>
+                        <div class="error" id="userError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="userPassword" placeholder="password123" required>
+                    </div>
+                    
+                    <button type="submit" class="login-btn">Login to Your Account</button>
+                    <div class="error" id="userGeneralError"></div>
+                    <div class="success" id="userSuccessMsg"></div>
+                </form>
+                
+                <div class="quick-login">
+                    <button type="button" class="quick-btn" onclick="quickUserLogin('user1')">Quick: User 1</button>
+                    <button type="button" class="quick-btn" onclick="quickUserLogin('user2')">Quick: User 2</button>
+                </div>
+                
+                <div class="demo-creds">
+                    <p><strong>Demo Credentials:</strong></p>
+                    <p>User 1: user1 / password123</p>
+                    <p>User 2: user2 / password123</p>
+                </div>
+            </div>
+
+            <!-- Admin Login Form -->
+            <div id="adminLoginForm" style="display:none">
+                <form onsubmit="handleAdminLogin(event)">
+                    <div class="form-group">
+                        <label>Admin Username</label>
+                        <input type="text" id="adminUsername" placeholder="admin" required>
+                        <div class="error" id="adminError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Admin Password</label>
+                        <input type="password" id="adminPassword" placeholder="admin@123" required>
+                    </div>
+                    
+                    <button type="submit" class="login-btn">Login to Admin Panel</button>
+                    <div class="error" id="adminGeneralError"></div>
+                    <div class="success" id="adminSuccessMsg"></div>
+                </form>
+                
+                <div class="demo-creds">
+                    <p><strong>Admin Credentials:</strong></p>
+                    <p>Username: <strong>admin</strong></p>
+                    <p>Password: <strong>admin@123</strong></p>
+                </div>
+            </div>
+
+            <!-- DEBUG PANEL -->
+            <div class="debug-panel">
+                <h4>🐛 DEBUG LOG</h4>
+                <div id="debugLog"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Debug logging function
+        function debugLog(message, type = 'info') {
+            const debugLog = document.getElementById('debugLog');
+            const entry = document.createElement('div');
+            entry.className = `debug-log ${type}`;
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            debugLog.appendChild(entry);
+            debugLog.scrollTop = debugLog.scrollHeight;
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+
+        debugLog('Page loaded - Initializing...', 'info');
+
+        // Check auth.js loading
+        setTimeout(() => {
+            if (typeof UserSession !== 'undefined') {
+                debugLog('✓ UserSession loaded from auth.js', 'success');
+            } else {
+                debugLog('⚠ UserSession not in auth.js, using fallback', 'error');
+            }
+        }, 100);
+
+        // Initialize UserSession if not defined
+        if (typeof UserSession === 'undefined') {
+            debugLog('Creating UserSession fallback...', 'info');
+            window.UserSession = {
+                saveSession(username, userId, userType = 'user') {
+                    debugLog(`Saving session: ${username} (${userType})`, 'success');
+                    localStorage.setItem('userType', userType);
+                    localStorage.setItem('username', username);
+                    localStorage.setItem('userId', userId);
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('loginTime', new Date().getTime());
+                    debugLog('Session stored in localStorage', 'success');
+                },
+                isLoggedIn() {
+                    return localStorage.getItem('isLoggedIn') === 'true';
+                },
+                getCurrentUser() {
+                    return {
+                        username: localStorage.getItem('username'),
+                        userId: localStorage.getItem('userId'),
+                        userType: localStorage.getItem('userType'),
+                        isLoggedIn: this.isLoggedIn()
+                    };
+                }
+            };
+            debugLog('✓ UserSession fallback created', 'success');
+        }
+
+        // Wait for auth.js to load
+        let authReady = false;
+        document.addEventListener('DOMContentLoaded', () => {
+            debugLog('DOM loaded', 'info');
+            authReady = true;
+            debugLog('Auth ready: ' + (typeof UserSession !== 'undefined'), 'info');
+            
+            // Check if already logged in
+            if (UserSession && UserSession.isLoggedIn()) {
+                const userType = UserSession.getCurrentUser().userType;
+                debugLog(`Already logged in as ${userType}, redirecting...`, 'success');
+                setTimeout(() => {
+                    debugLog(`Redirecting to ${userType === 'admin' ? 'admin-dashboard.html' : 'index.html'}`, 'info');
+                    window.location.href = userType === 'admin' ? 'admin-dashboard.html' : 'index.html';
+                }, 500);
+            } else {
+                debugLog('No active session', 'info');
+            }
+        });
+
+        let currentType = 'user';
+
+        function switchType(type) {
+            debugLog(`Switched to ${type} login`, 'info');
+            currentType = type;
+            document.getElementById('userTypeBtn').classList.toggle('active', type === 'user');
+            document.getElementById('adminTypeBtn').classList.toggle('active', type === 'admin');
+            document.getElementById('userLoginForm').style.display = type === 'user' ? 'block' : 'none';
+            document.getElementById('adminLoginForm').style.display = type === 'admin' ? 'block' : 'none';
+        }
+
+        function handleUserLogin(e) {
+            e.preventDefault();
+            debugLog('User login form submitted', 'info');
+            
+            const username = document.getElementById('userUsername').value.trim();
+            const password = document.getElementById('userPassword').value;
+            
+            debugLog(`Attempting login: ${username}`, 'info');
+            
+            document.getElementById('userError').style.display = 'none';
+            document.getElementById('userGeneralError').style.display = 'none';
+            document.getElementById('userSuccessMsg').style.display = 'none';
+            
+            if (!username) {
+                debugLog('Username empty', 'error');
+                document.getElementById('userError').textContent = 'Username required';
+                document.getElementById('userError').style.display = 'block';
+                return;
+            }
+            
+            if ((username === 'user1' || username === 'user2') && password === 'password123') {
+                debugLog('✓ Credentials valid', 'success');
+                const userId = username === 'user1' ? 'U001' : 'U002';
+                UserSession.saveSession(username, userId, 'user');
+                
+                document.getElementById('userSuccessMsg').textContent = `✓ Welcome back, ${username}!`;
+                document.getElementById('userSuccessMsg').style.display = 'block';
+                
+                debugLog('Session saved, redirecting to index.html', 'success');
+                setTimeout(() => {
+                    debugLog('Executing redirect', 'info');
+                    window.location.href = 'index.html';
+                }, 800);
+            } else {
+                debugLog(`✗ Invalid credentials. Got: ${username}/${password}`, 'error');
+                document.getElementById('userGeneralError').textContent = 'Invalid credentials. Use user1 or user2 with password123';
+                document.getElementById('userGeneralError').style.display = 'block';
+            }
+        }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            debugLog('Admin login form submitted', 'info');
+            
+            const username = document.getElementById('adminUsername').value.trim();
+            const password = document.getElementById('adminPassword').value;
+            
+            debugLog(`Attempting admin login: ${username}`, 'info');
+            
+            document.getElementById('adminError').style.display = 'none';
+            document.getElementById('adminGeneralError').style.display = 'none';
+            document.getElementById('adminSuccessMsg').style.display = 'none';
+            
+            if (!username) {
+                debugLog('Username empty', 'error');
+                document.getElementById('adminError').textContent = 'Username required';
+                document.getElementById('adminError').style.display = 'block';
+                return;
+            }
+            
+            if (username === 'admin' && password === 'admin@123') {
+                debugLog('✓ Admin credentials valid', 'success');
+                UserSession.saveSession(username, 'ADMIN001', 'admin');
+                
+                document.getElementById('adminSuccessMsg').textContent = '✓ Admin login successful!';
+                document.getElementById('adminSuccessMsg').style.display = 'block';
+                
+                debugLog('Admin session saved, redirecting to admin-dashboard.html', 'success');
+                setTimeout(() => {
+                    debugLog('Executing redirect', 'info');
+                    window.location.href = 'admin-dashboard.html';
+                }, 800);
+            } else {
+                debugLog(`✗ Invalid admin credentials. Got: ${username}/${password}`, 'error');
+                document.getElementById('adminGeneralError').textContent = 'Invalid admin credentials. Use admin / admin@123';
+                document.getElementById('adminGeneralError').style.display = 'block';
+            }
+        }
+
+        function quickUserLogin(username) {
+            debugLog(`Quick login: ${username}`, 'info');
+            const userId = username === 'user1' ? 'U001' : 'U002';
+            UserSession.saveSession(username, userId, 'user');
+            debugLog('Quick login complete, redirecting...', 'success');
+            window.location.href = 'index.html';
+        }
+
+        debugLog('Scripts initialized', 'success');
+    </script>
+</body>
+</html>
