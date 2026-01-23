@@ -7,6 +7,25 @@
 (function() {
     'use strict';
 
+    // Clear cache on page close to ensure fresh content
+    window.addEventListener('beforeunload', function() {
+        if ('caches' in window) {
+            caches.keys().then(cacheNames => {
+                cacheNames.forEach(cacheName => {
+                    caches.delete(cacheName);
+                });
+            });
+        }
+        // Also clear service worker cache if exists
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(registrations => {
+                registrations.forEach(registration => {
+                    registration.unregister();
+                });
+            });
+        }
+    });
+
     // Create global UserSession if not exists
     if (typeof window.UserSession === 'undefined') {
         window.UserSession = {
