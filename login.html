@@ -121,6 +121,30 @@
     </div>
 
     <script>
+        // Initialize UserSession if not defined
+        if (typeof UserSession === 'undefined') {
+            window.UserSession = {
+                saveSession(username, userId, userType = 'user') {
+                    localStorage.setItem('userType', userType);
+                    localStorage.setItem('username', username);
+                    localStorage.setItem('userId', userId);
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('loginTime', new Date().getTime());
+                },
+                isLoggedIn() {
+                    return localStorage.getItem('isLoggedIn') === 'true';
+                },
+                getCurrentUser() {
+                    return {
+                        username: localStorage.getItem('username'),
+                        userId: localStorage.getItem('userId'),
+                        userType: localStorage.getItem('userType'),
+                        isLoggedIn: this.isLoggedIn()
+                    };
+                }
+            };
+        }
+
         // Wait for auth.js to load
         let authReady = false;
         document.addEventListener('DOMContentLoaded', () => {
@@ -128,7 +152,9 @@
             // Check if already logged in
             if (UserSession && UserSession.isLoggedIn()) {
                 const userType = UserSession.getCurrentUser().userType;
-                window.location.href = userType === 'admin' ? 'admin-dashboard.html' : 'index.html';
+                setTimeout(() => {
+                    window.location.href = userType === 'admin' ? 'admin-dashboard.html' : 'index.html';
+                }, 500);
             }
         });
 
@@ -167,9 +193,9 @@
                 
                 setTimeout(() => {
                     window.location.href = 'index.html';
-                }, 1000);
+                }, 800);
             } else {
-                document.getElementById('userGeneralError').textContent = 'Invalid credentials';
+                document.getElementById('userGeneralError').textContent = 'Invalid credentials. Use user1 or user2 with password123';
                 document.getElementById('userGeneralError').style.display = 'block';
             }
         }
@@ -198,9 +224,9 @@
                 
                 setTimeout(() => {
                     window.location.href = 'admin-dashboard.html';
-                }, 1000);
+                }, 800);
             } else {
-                document.getElementById('adminGeneralError').textContent = 'Invalid admin credentials';
+                document.getElementById('adminGeneralError').textContent = 'Invalid admin credentials. Use admin / admin@123';
                 document.getElementById('adminGeneralError').style.display = 'block';
             }
         }
